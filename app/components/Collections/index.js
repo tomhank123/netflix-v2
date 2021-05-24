@@ -6,13 +6,19 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import Movie from 'components/Movie';
 
 import Ul from './Ul';
 import fixture from './fixture';
 
-function Collections() {
+function Collections({ collections }) {
+  // eslint-disable-next-line no-console
+  console.log('collections', collections);
+
+  const { items } = collections;
+
   return (
     <div>
       <Card body bg="secondary" className="text-light text-center">
@@ -21,23 +27,24 @@ function Collections() {
 
       {fixture.map(({ id, title }) => (
         <React.Fragment key={id}>
+          <hr />
           <h5>{title}</h5>
           <Ul>
-            {Array(2)
-              .fill(0)
-              .map((item, index) => (
+            {items &&
+              items.map((item, index) => (
                 <li>
-                  <Movie key={item + index} />
+                  <Movie item={item} key={item.id + index} />
                 </li>
               ))}
           </Ul>
-          <hr />
         </React.Fragment>
       ))}
     </div>
   );
 }
 
-Collections.propTypes = {};
+Collections.propTypes = {
+  collections: PropTypes.object,
+};
 
 export default Collections;

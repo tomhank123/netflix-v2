@@ -5,21 +5,28 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 
-function Movie() {
+import { getPoster } from './helpers';
+
+function Movie({ item }) {
   return (
-    <Card body bg="secondary" className="text-center">
+    <Card className="border-0">
       <Link to="/episodes" className="text-light">
-        Movie Item
+        <img
+          className="mw-100"
+          src={getPoster(item.poster_path)}
+          alt={item.title}
+        />
       </Link>
     </Card>
   );
 }
 
-Movie.propTypes = {};
+Movie.propTypes = {
+  item: PropTypes.object,
+};
 
 export default Movie;

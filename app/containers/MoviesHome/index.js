@@ -4,12 +4,12 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -20,13 +20,18 @@ import Collections from 'components/Collections';
 import Genres from 'containers/Genres';
 import Container from 'react-bootstrap/Container';
 
-import makeSelectMoviesHome from './selectors';
+import * as actions from './actions';
+import { makeSelectPopularMovies } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function MoviesHome() {
+export function MoviesHome({ onLoadCollections, collections }) {
   useInjectReducer({ key: 'moviesHome', reducer });
   useInjectSaga({ key: 'moviesHome', saga });
+
+  useEffect(() => {
+    onLoadCollections();
+  }, []);
 
   return (
     <div>
@@ -37,7 +42,7 @@ export function MoviesHome() {
       <Header />
       <Container>
         <Genres />
-        <Collections />
+        <Collections collections={collections} />
         <Footer />
       </Container>
     </div>
@@ -45,18 +50,17 @@ export function MoviesHome() {
 }
 
 MoviesHome.propTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  dispatch: PropTypes.func.isRequired,
+  collections: PropTypes.object,
+  onLoadCollections: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  moviesHome: makeSelectMoviesHome(),
+  collections: makeSelectPopularMovies(),
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+  const onLoadCollections = actions.popularMovies.request;
+  return bindActionCreators({ onLoadCollections }, dispatch);
 }
 
 const withConnect = connect(
