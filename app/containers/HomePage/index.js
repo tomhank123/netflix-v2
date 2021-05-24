@@ -6,21 +6,25 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { Helmet } from 'react-helmet';
+
+import Container from 'react-bootstrap/Container';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Collections from 'components/Collections';
-import messages from './messages';
 
 export default function HomePage() {
   return (
     <div>
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <Helmet>
+        <title>Netflix Clone</title>
+        <meta name="description" content="Description of SeriesHome" />
+      </Helmet>
       <Header />
-      <Collections />
-      <Footer />
+      <Container>
+        <Collections />
+        <Footer />
+      </Container>
     </div>
   );
 }

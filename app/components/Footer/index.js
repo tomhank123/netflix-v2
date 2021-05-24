@@ -5,24 +5,13 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import Card from 'react-bootstrap/Card';
 
 function Footer() {
   return (
-    <div>
-      <h1>Footer</h1>
-      <ul>
-        {Array(6)
-          .fill(0)
-          .map((_, index) => (
-            <li>
-              <Link to=".">Footer Item {index}</Link>
-            </li>
-          ))}
-      </ul>
-    </div>
+    <Card body bg="secondary" className="text-light text-center mt-3">
+      Footer
+    </Card>
   );
 }
 

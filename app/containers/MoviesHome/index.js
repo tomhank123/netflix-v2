@@ -18,6 +18,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Collections from 'components/Collections';
 import Genres from 'containers/Genres';
+import Container from 'react-bootstrap/Container';
 
 import makeSelectMoviesHome from './selectors';
 import reducer from './reducer';
@@ -30,14 +31,15 @@ export function MoviesHome() {
   return (
     <div>
       <Helmet>
-        <title>MoviesHome</title>
+        <title>Movies Home</title>
         <meta name="description" content="Description of MoviesHome" />
       </Helmet>
-      <h1>Movies Home</h1>
       <Header />
-      <Genres />
-      <Collections />
-      <Footer />
+      <Container>
+        <Genres />
+        <Collections />
+        <Footer />
+      </Container>
     </div>
   );
 }

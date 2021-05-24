@@ -14,6 +14,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
+import Container from 'react-bootstrap/Container';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Collections from 'components/Collections';
@@ -30,14 +31,15 @@ export function SeriesHome() {
   return (
     <div>
       <Helmet>
-        <title>SeriesHome</title>
+        <title>Series Home</title>
         <meta name="description" content="Description of SeriesHome" />
       </Helmet>
-      <h1>Series Home</h1>
       <Header />
-      <Genres />
-      <Collections />
-      <Footer />
+      <Container>
+        <Genres />
+        <Collections />
+        <Footer />
+      </Container>
     </div>
   );
 }

@@ -5,26 +5,52 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
+import { NavLink as RouteLink } from 'react-router-dom';
+
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Nav from 'react-bootstrap/Nav';
+import NavLink from 'react-bootstrap/NavLink';
+import Navbar from 'react-bootstrap/Navbar';
+
+import Wrapper from './Wrapper';
 
 function Header() {
   return (
-    <div>
-      <h1>Header</h1>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/movies-home">Movies Home</Link>
-        </li>
-        <li>
-          <Link to="/series-home">Series Home</Link>
-        </li>
-      </ul>
-    </div>
+    <Wrapper>
+      <Navbar bg="secondary" variant="dark" expand="lg">
+        <Navbar.Brand as={RouteLink} to="/">
+          Netflix Clone
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <NavLink as={RouteLink} to="/">
+              Home
+            </NavLink>
+            <NavLink as={RouteLink} to="/series-home">
+              TV Shows
+            </NavLink>
+            <NavLink as={RouteLink} to="/movies-home">
+              Movies
+            </NavLink>
+            <NavLink as={RouteLink} to="/new-popular">
+              New & Popular
+            </NavLink>
+            <NavLink as={RouteLink} to="/my-list">
+              My List
+            </NavLink>
+          </Nav>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-light">Search</Button>
+          </Form>
+        </Navbar.Collapse>
+      </Navbar>
+    </Wrapper>
   );
 }
 

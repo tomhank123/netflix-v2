@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /**
  *
  * Collections
@@ -5,23 +6,34 @@
  */
 
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 import Movie from 'components/Movie';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+
+import Ul from './Ul';
+import fixture from './fixture';
 
 function Collections() {
   return (
     <div>
-      <h1>Collections</h1>
-      <ul>
-        {Array(20)
-          .fill(0)
-          .map(() => (
-            <li>
-              <Movie />
-            </li>
-          ))}
-      </ul>
+      <Card body bg="secondary" className="text-light text-center">
+        Hero
+      </Card>
+
+      {fixture.map(({ id, title }) => (
+        <React.Fragment key={id}>
+          <h5>{title}</h5>
+          <Ul>
+            {Array(2)
+              .fill(0)
+              .map((item, index) => (
+                <li>
+                  <Movie key={item + index} />
+                </li>
+              ))}
+          </Ul>
+          <hr />
+        </React.Fragment>
+      ))}
     </div>
   );
 }
