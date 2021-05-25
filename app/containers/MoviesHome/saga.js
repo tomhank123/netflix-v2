@@ -10,18 +10,21 @@ export function* fetchCollecttions() {
   const getTrendingNow = `/movie/popular?page=4`;
   const getPopular = `/movie/popular?page=1`;
   const getUpcoming = `/movie/upcoming?page=2`;
+  const getTopRated = `/movie/top_rated?page=2`;
 
   try {
     const [
       originals,
       continueWatching,
       trendingNow,
+      topRated,
       popular,
       upcoming,
     ] = yield all([
       call(request, 'get', getOriginals),
       call(request, 'get', getContinueWatching),
       call(request, 'get', getTrendingNow),
+      call(request, 'get', getTopRated),
       call(request, 'get', getPopular),
       call(request, 'get', getUpcoming),
     ]);
@@ -41,7 +44,11 @@ export function* fetchCollecttions() {
           data: trendingNow,
         },
         {
-          title: 'Popular',
+          title: 'Top 10 in Vietnam Today',
+          data: topRated,
+        },
+        {
+          title: 'Popular on Netflix',
           data: popular,
         },
         {

@@ -33,7 +33,7 @@ export function Browse() {
         <meta name="description" content="Description of Browse" />
       </Helmet>
 
-      {profile.displayName ? (
+      {!profile.displayName ? (
         <MoviesHome />
       ) : (
         <Profiles setProfile={setProfile} />

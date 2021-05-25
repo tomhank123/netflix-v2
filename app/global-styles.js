@@ -21,8 +21,8 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100%;
     min-width: 100%;
 
-    background-color: #000000;
-    color: #e5e5e5;
+    // background-color: #000000;
+    // color: #e5e5e5;
   }
 
   p,
