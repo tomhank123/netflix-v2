@@ -42,5 +42,5 @@ const moviesHomeReducer = (state = initialState, action) =>
 export default moviesHomeReducer;
 
 function reduceFetchPopularMovies(response, draft) {
-  draft.popularMovies.items = response.results.filter((_, idx) => idx < 3);
+  draft.popularMovies.items = response.results.filter((_, idx) => idx < 20);
 }

@@ -13,6 +13,7 @@ import { bindActionCreators, compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import selectionFilter from 'utils/selectionFilter';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -33,6 +34,11 @@ export function MoviesHome({ onLoadCollections, collections }) {
     onLoadCollections();
   }, []);
 
+  const newCollections = {
+    ...collections,
+    items: selectionFilter({ films: collections.items || [] }),
+  };
+
   return (
     <div>
       <Helmet>
@@ -42,7 +48,7 @@ export function MoviesHome({ onLoadCollections, collections }) {
       <Header />
       <Container>
         <Genres />
-        <Collections collections={collections} />
+        <Collections collections={newCollections} />
         <Footer />
       </Container>
     </div>

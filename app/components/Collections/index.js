@@ -11,12 +11,7 @@ import Card from 'react-bootstrap/Card';
 import Movie from 'components/Movie';
 
 import Ul from './Ul';
-import fixture from './fixture';
-
 function Collections({ collections }) {
-  // eslint-disable-next-line no-console
-  console.log('collections', collections);
-
   const { items } = collections;
 
   return (
@@ -25,13 +20,13 @@ function Collections({ collections }) {
         Hero
       </Card>
 
-      {fixture.map(({ id, title }) => (
-        <React.Fragment key={id}>
+      {items.map(({ title, data }) => (
+        <React.Fragment key={title}>
           <hr />
           <h5>{title}</h5>
           <Ul>
-            {items &&
-              items.map((item, index) => (
+            {data &&
+              data.map((item, index) => (
                 <li>
                   <Movie item={item} key={item.id + index} />
                 </li>

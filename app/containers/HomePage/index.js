@@ -22,7 +22,7 @@ export default function HomePage() {
       </Helmet>
       <Header />
       <Container>
-        <Collections />
+        <Collections collections={{ items: [] }} />
         <Footer />
       </Container>
     </div>

@@ -37,7 +37,7 @@ export function SeriesHome() {
       <Header />
       <Container>
         <Genres />
-        <Collections />
+        <Collections collections={{ items: [] }} />
         <Footer />
       </Container>
     </div>
