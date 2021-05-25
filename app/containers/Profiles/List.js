@@ -5,7 +5,7 @@ export default styled.ul`
   margin: 0;
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 1.5rem;
 
   li {
     list-style-type: none;

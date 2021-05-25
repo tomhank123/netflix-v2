@@ -31,7 +31,7 @@ export function Profiles({ setProfile }) {
           </li>
         ))}
       </List>
-      <Button size="sm">manage profiles</Button>
+      <Button>manage profiles</Button>
     </Wrapper>
   );
 }

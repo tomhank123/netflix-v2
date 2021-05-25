@@ -14,6 +14,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
 import Profiles from 'containers/Profiles';
+import MoviesHome from 'containers/MoviesHome';
+
 import makeSelectBrowse from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -32,7 +34,7 @@ export function Browse() {
       </Helmet>
 
       {profile.displayName ? (
-        <p>Browse</p>
+        <MoviesHome />
       ) : (
         <Profiles setProfile={setProfile} />
       )}

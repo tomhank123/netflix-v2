@@ -6,17 +6,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from 'react-bootstrap/Card';
 import Movie from 'components/Movie';
 
 import Ul from './Ul';
+import Wrapper from './Wrapper';
+
 function Collections({ collections }) {
   return (
-    <div>
-      <Card body bg="secondary" className="text-light text-center">
-        Hero
-      </Card>
-
+    <Wrapper>
       {collections &&
         collections.map(({ title, data }) => (
           <React.Fragment key={title}>
@@ -32,7 +29,7 @@ function Collections({ collections }) {
             </Ul>
           </React.Fragment>
         ))}
-    </div>
+    </Wrapper>
   );
 }
 
