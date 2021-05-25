@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
@@ -37,17 +37,14 @@ export function SeriesHome() {
       <Header />
       <Container>
         <Genres />
-        <Collections collections={{ items: [] }} />
+        <Collections collections={[]} />
         <Footer />
       </Container>
     </div>
   );
 }
 
-SeriesHome.propTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  dispatch: PropTypes.func.isRequired,
-};
+SeriesHome.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   seriesHome: makeSelectSeriesHome(),

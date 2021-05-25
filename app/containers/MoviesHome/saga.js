@@ -1,25 +1,64 @@
 /* eslint-disable no-console */
 import request from 'utils/request';
 import { REQUEST } from 'utils/constants';
-import { takeLatest, all } from 'redux-saga/effects';
-import { createAsyncActionCreator } from 'utils/reduxHelpers';
-import * as actions from './actions';
+import { takeLatest, all, call, put } from 'redux-saga/effects';
+import { COLLECTIONS, collections } from './actions';
 
-export function* fetchPopularMovies() {
-  const requestURL = `/movie/popular?page=1`;
-  yield createAsyncActionCreator(
-    request,
-    'get',
-    requestURL,
-    actions.popularMovies,
-  );
+export function* fetchCollecttions() {
+  const getOriginals = `/movie/popular?page=2`;
+  const getContinueWatching = `/movie/popular?page=3`;
+  const getTrendingNow = `/movie/popular?page=4`;
+  const getPopular = `/movie/popular?page=1`;
+  const getUpcoming = `/movie/upcoming?page=2`;
+
+  try {
+    const [
+      originals,
+      continueWatching,
+      trendingNow,
+      popular,
+      upcoming,
+    ] = yield all([
+      call(request, 'get', getOriginals),
+      call(request, 'get', getContinueWatching),
+      call(request, 'get', getTrendingNow),
+      call(request, 'get', getPopular),
+      call(request, 'get', getUpcoming),
+    ]);
+
+    yield put(
+      collections.success([
+        {
+          title: 'Netflix Originals',
+          data: originals,
+        },
+        {
+          title: 'Continue Watching for Me',
+          data: continueWatching,
+        },
+        {
+          title: 'Trending Now',
+          data: trendingNow,
+        },
+        {
+          title: 'Popular',
+          data: popular,
+        },
+        {
+          title: 'Upcoming',
+          data: upcoming,
+        },
+      ]),
+    );
+  } catch (err) {
+    yield put(collections.failure(err));
+  }
 }
 
-export function* watchPopularMovies() {
-  yield takeLatest(actions.POPULAR_MOVIES[REQUEST], fetchPopularMovies);
+export function* watchCollections() {
+  yield takeLatest(COLLECTIONS[REQUEST], fetchCollecttions);
 }
 
-// Individual exports for testing
 export default function* moviesHomeSaga() {
-  yield all([watchPopularMovies()]);
+  yield all([watchCollections()]);
 }

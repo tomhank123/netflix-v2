@@ -13,7 +13,6 @@ import { bindActionCreators, compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import selectionFilter from 'utils/selectionFilter';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -22,22 +21,17 @@ import Genres from 'containers/Genres';
 import Container from 'react-bootstrap/Container';
 
 import * as actions from './actions';
-import { makeSelectPopularMovies } from './selectors';
+import { makeSelectCollections } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function MoviesHome({ onLoadCollections, collections }) {
+export function MoviesHome({ collections, onLoadCollections }) {
   useInjectReducer({ key: 'moviesHome', reducer });
   useInjectSaga({ key: 'moviesHome', saga });
 
   useEffect(() => {
     onLoadCollections();
   }, []);
-
-  const newCollections = {
-    ...collections,
-    items: selectionFilter({ films: collections.items || [] }),
-  };
 
   return (
     <div>
@@ -48,7 +42,7 @@ export function MoviesHome({ onLoadCollections, collections }) {
       <Header />
       <Container>
         <Genres />
-        <Collections collections={newCollections} />
+        <Collections collections={collections.items} />
         <Footer />
       </Container>
     </div>
@@ -61,11 +55,11 @@ MoviesHome.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  collections: makeSelectPopularMovies(),
+  collections: makeSelectCollections(),
 });
 
 function mapDispatchToProps(dispatch) {
-  const onLoadCollections = actions.popularMovies.request;
+  const onLoadCollections = actions.collections.request;
   return bindActionCreators({ onLoadCollections }, dispatch);
 }
 

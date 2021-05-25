@@ -5,11 +5,11 @@
  */
 import produce from 'immer';
 import { FAILURE, REQUEST, SUCCESS } from 'utils/constants';
+import { COLLECTIONS } from './actions';
 import { DEFAULT_ACTION } from './constants';
-import { POPULAR_MOVIES } from './actions';
 
 export const initialState = {
-  popularMovies: {
+  collections: {
     loading: false,
     error: false,
     items: false,
@@ -20,18 +20,19 @@ export const initialState = {
 const moviesHomeReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case POPULAR_MOVIES[REQUEST]:
-        draft.popularMovies.loading = true;
+      case COLLECTIONS[REQUEST]:
+        draft.collections.loading = true;
         break;
 
-      case POPULAR_MOVIES[SUCCESS]:
-        draft.popularMovies.loading = false;
-        reduceFetchPopularMovies(action.response, draft);
+      case COLLECTIONS[SUCCESS]:
+        draft.collections.loading = false;
+        draft.collections.error = false;
+        reduceFetchCollections(action.response, draft);
         break;
 
-      case POPULAR_MOVIES[FAILURE]:
-        draft.popularMovies.loading = false;
-        draft.popularMovies.error = action.response;
+      case COLLECTIONS[FAILURE]:
+        draft.collections.loading = false;
+        draft.collections.error = action.response;
         break;
 
       case DEFAULT_ACTION:
@@ -41,6 +42,9 @@ const moviesHomeReducer = (state = initialState, action) =>
 
 export default moviesHomeReducer;
 
-function reduceFetchPopularMovies(response, draft) {
-  draft.popularMovies.items = response.results.filter((_, idx) => idx < 20);
+function reduceFetchCollections(response, draft) {
+  draft.collections.items = response.map(({ title, data }) => ({
+    title,
+    data: data.results.filter((_, index) => index < 7),
+  }));
 }

@@ -29,5 +29,5 @@ export function defaultAction() {
  *    }
  */
 
-export const POPULAR_MOVIES = createRequestTypes('POPULAR_MOVIES');
-export const popularMovies = createAsyncAction(POPULAR_MOVIES);
+export const COLLECTIONS = createRequestTypes('COLLECTIONS');
+export const collections = createAsyncAction(COLLECTIONS);

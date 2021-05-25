@@ -14,18 +14,17 @@ const selectMoviesHomeDomain = state => state.moviesHome || initialState;
 /**
  * Default selector used by MoviesHome
  */
-
-const makeSelectPopularMovies = () =>
-  createSelector(
-    selectMoviesHomeDomain,
-    homeState => homeState.popularMovies,
-  );
-
 const makeSelectMoviesHome = () =>
   createSelector(
     selectMoviesHomeDomain,
     substate => substate,
   );
 
+const makeSelectCollections = () =>
+  createSelector(
+    selectMoviesHomeDomain,
+    homeState => homeState.collections,
+  );
+
 export default makeSelectMoviesHome;
-export { makeSelectPopularMovies, selectMoviesHomeDomain };
+export { selectMoviesHomeDomain, makeSelectCollections };

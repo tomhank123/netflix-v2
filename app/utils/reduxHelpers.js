@@ -1,4 +1,4 @@
-import { call, put, delay } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { REQUEST, SUCCESS, FAILURE } from './constants';
 
 export function createRequestTypes(base) {
@@ -37,12 +37,8 @@ export function* createAsyncActionCreator(
   entity,
   ...args
 ) {
-  yield delay(2000);
-
   try {
     const response = yield call(request, method, url);
-    // we directly return the result object and throw away the headers and the status text here
-    // if status and headers are needed, then instead of returning response.result, we have to return just response.
     yield put(entity.success(response, ...args));
   } catch (error) {
     yield put(entity.failure(error, ...args));
