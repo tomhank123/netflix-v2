@@ -17,6 +17,7 @@ import SeriesHome from 'containers/SeriesHome/Loadable';
 import Episodes from 'containers/Episodes/Loadable';
 import Player from 'containers/Player/Loadable';
 import SearchPage from 'containers/SearchPage/Loadable';
+import Browse from 'containers/Browse/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -26,6 +27,7 @@ export default function App() {
     <div>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/browse" component={Browse} />
         <Route exact path="/movies-home" component={MoviesHome} />
         <Route exact path="/series-home" component={SeriesHome} />
         <Route exact path="/episodes" component={Episodes} />
