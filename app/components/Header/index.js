@@ -16,6 +16,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavLink from 'react-bootstrap/NavLink';
 import Navbar from 'react-bootstrap/Navbar';
 
+import * as ROUTES from 'utils/routes';
 import Wrapper from './Wrapper';
 
 function Header() {
@@ -28,19 +29,19 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <NavLink as={RouteLink} to="/">
+            <NavLink as={RouteLink} to={ROUTES.HOME}>
               Home
             </NavLink>
-            <NavLink as={RouteLink} to="/series-home">
+            <NavLink as={RouteLink} to={ROUTES.SERIES}>
               TV Shows
             </NavLink>
-            <NavLink as={RouteLink} to="/movies-home">
+            <NavLink as={RouteLink} to={ROUTES.MOVIES}>
               Movies
             </NavLink>
-            <NavLink as={RouteLink} to="/new-popular">
+            <NavLink as={RouteLink} to={ROUTES.LATEST}>
               New & Popular
             </NavLink>
-            <NavLink as={RouteLink} to="/my-list">
+            <NavLink as={RouteLink} to={ROUTES.MY_LIST}>
               My List
             </NavLink>
           </Nav>
