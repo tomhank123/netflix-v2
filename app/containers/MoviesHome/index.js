@@ -17,7 +17,6 @@ import { useInjectReducer } from 'utils/injectReducer';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Collections from 'components/Collections';
-import Genres from 'containers/Genres';
 import Container from 'react-bootstrap/Container';
 
 import * as actions from './actions';
@@ -41,7 +40,6 @@ export function MoviesHome({ collections, onLoadCollections }) {
       </Helmet>
       <Header />
       <Container>
-        <Genres />
         <Collections collections={collections.items} />
         <Footer />
       </Container>
