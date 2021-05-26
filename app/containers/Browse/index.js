@@ -30,7 +30,7 @@ export function Browse() {
     <React.Fragment>
       <Header />
       <Container fluid>
-        <NewCollections collections={collectionsData} />
+        <NewCollections isSwiper collections={collectionsData} />
         <Footer />
       </Container>
     </React.Fragment>

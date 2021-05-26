@@ -29,7 +29,7 @@ export function Latest() {
       <SelectProfiles>
         <Header />
         <Container fluid>
-          <NewCollections collections={collectionsData} />
+          <NewCollections isSwiper collections={collectionsData} />
           <Footer />
         </Container>
       </SelectProfiles>

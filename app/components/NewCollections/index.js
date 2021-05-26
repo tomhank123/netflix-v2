@@ -8,40 +8,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import swiperOptions from 'utils/swiperConfig';
 import NewMovie from 'components/NewMovie';
 import Billboard from 'components/Billboard';
 
 import { getCollections } from './helpers';
+import MovieList from './MovieList';
 import Wrapper from './Wrapper';
 
-function NewCollections({ collections }) {
+function NewCollections({ isSwiper = false, collections }) {
   const [billboard, filteredColls] = getCollections(collections);
-  const swiperOptions = {
-    spaceBetween: 16,
-    slidesPerView: 3,
-    // onSlideChange: () => console.log('slide change'),
-    // onSwiper: swiper => console.log(swiper),
-    loop: true,
-    freeMode: true,
-    breakpoints: {
-      '@0.00': {
-        slidesPerView: 3,
-        spaceBetween: 8,
-      },
-      '@0.75': {
-        slidesPerView: 3,
-        spaceBetween: 10,
-      },
-      '@1.00': {
-        slidesPerView: 4,
-        spaceBetween: 12,
-      },
-      '@1.50': {
-        slidesPerView: 6,
-        spaceBetween: 16,
-      },
-    },
-  };
 
   return (
     <Wrapper>
@@ -51,14 +27,21 @@ function NewCollections({ collections }) {
         filteredColls.map(({ id, title, data }) => (
           <section key={id} className="mt-3">
             <h5>{title}</h5>
-            <Swiper {...swiperOptions}>
-              {data &&
-                data.map(movie => (
-                  <SwiperSlide key={movie.id}>
-                    <NewMovie item={movie} />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
+            {isSwiper ? (
+              <Swiper {...swiperOptions}>
+                {data &&
+                  data.map(movie => (
+                    <SwiperSlide key={movie.id}>
+                      <NewMovie item={movie} />
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            ) : (
+              <MovieList>
+                {data &&
+                  data.map(movie => <NewMovie key={movie.id} item={movie} />)}
+              </MovieList>
+            )}
           </section>
         ))}
     </Wrapper>
@@ -66,6 +49,7 @@ function NewCollections({ collections }) {
 }
 
 NewCollections.propTypes = {
+  isSwiper: PropTypes.bool,
   collections: PropTypes.array,
 };
 
