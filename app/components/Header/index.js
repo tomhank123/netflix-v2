@@ -41,6 +41,12 @@ function Header({ isFixed, readonly }) {
             <NavLink as={RouteLink} to={ROUTES.BROWSE}>
               Home
             </NavLink>
+            <NavLink as={RouteLink} to={`${ROUTES.BROWSE}/genre/34399`}>
+              Movies
+            </NavLink>
+            <NavLink as={RouteLink} to={`${ROUTES.BROWSE}/genre/83`}>
+              TV Shows
+            </NavLink>
             <NavLink as={RouteLink} to={ROUTES.LATEST}>
               New & Popular
             </NavLink>

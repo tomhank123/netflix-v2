@@ -9,5 +9,5 @@ export const SEARCH = '/search';
 export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';
 
-export const MOVIES = '/browse/movies';
-export const SERIES = '/browse/series';
+export const MOVIES = '/browse/genre/:genreId';
+export const SERIES = '/browse/genre/:genreId';

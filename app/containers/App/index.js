@@ -30,7 +30,7 @@ export default function App() {
     <div>
       <Switch>
         <Redirect exact from={ROUTES.HOME} to={ROUTES.BROWSE} />
-        <Route exact path={ROUTES.BROWSE} component={BrowsePage} />
+        <Route path={ROUTES.BROWSE} component={BrowsePage} />
         <Route exact path={ROUTES.WATCH} component={WatchPage} />
         <Route exact path={ROUTES.LATEST} component={LatestPage} />
         <Route exact path={ROUTES.MY_LIST} component={MyListPage} />
