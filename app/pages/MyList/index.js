@@ -10,7 +10,9 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
-import Box from 'components/Box';
+import { singleCollection } from 'fixtures/collections';
+
+import NewCollections from 'components/NewCollections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
@@ -23,8 +25,7 @@ export function MyList() {
       </Helmet>
 
       <Header />
-      <hr />
-      <Box>Collections</Box>
+      <NewCollections collections={singleCollection} />
       <hr />
       <Footer />
     </div>

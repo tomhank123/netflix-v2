@@ -11,8 +11,6 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
 import Box from 'components/Box';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
 
 export function Watch() {
   return (
@@ -22,11 +20,7 @@ export function Watch() {
         <meta name="description" content="Description of Watch" />
       </Helmet>
 
-      <Header />
-      <hr />
-      <Box>Collections</Box>
-      <hr />
-      <Footer />
+      <Box>Player</Box>
     </div>
   );
 }

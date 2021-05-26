@@ -10,9 +10,12 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
+import { singleCollection } from 'fixtures/collections';
+
 import Box from 'components/Box';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import NewCollections from 'components/NewCollections';
 
 export function Search() {
   return (
@@ -24,7 +27,8 @@ export function Search() {
 
       <Header />
       <hr />
-      <Box>Collections</Box>
+      <Box>Explore titles related to: Keyword A | Keyword B</Box>
+      <NewCollections collections={singleCollection} />
       <hr />
       <Footer />
     </div>
