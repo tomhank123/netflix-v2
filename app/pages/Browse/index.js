@@ -10,6 +10,10 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
+import Box from 'components/Box';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+
 export function Browse() {
   return (
     <div>
@@ -18,7 +22,11 @@ export function Browse() {
         <meta name="description" content="Description of Browse" />
       </Helmet>
 
-      <h1>Browse Page</h1>
+      <Header />
+      <hr />
+      <Box>Collections</Box>
+      <hr />
+      <Footer />
     </div>
   );
 }

@@ -10,6 +10,10 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
+import Box from 'components/Box';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+
 export function Search() {
   return (
     <div>
@@ -17,7 +21,12 @@ export function Search() {
         <title>Search</title>
         <meta name="description" content="Description of Search" />
       </Helmet>
-      <h1>Search Page</h1>
+
+      <Header />
+      <hr />
+      <Box>Collections</Box>
+      <hr />
+      <Footer />
     </div>
   );
 }

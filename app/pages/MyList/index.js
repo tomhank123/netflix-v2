@@ -10,6 +10,10 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
+import Box from 'components/Box';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+
 export function MyList() {
   return (
     <div>
@@ -17,7 +21,12 @@ export function MyList() {
         <title>MyList</title>
         <meta name="description" content="Description of MyList" />
       </Helmet>
-      <h1>My List Page</h1>
+
+      <Header />
+      <hr />
+      <Box>Collections</Box>
+      <hr />
+      <Footer />
     </div>
   );
 }

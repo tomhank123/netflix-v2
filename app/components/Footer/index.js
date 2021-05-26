@@ -5,14 +5,10 @@
  */
 
 import React from 'react';
-import Card from 'react-bootstrap/Card';
+import Box from 'components/Box';
 
 function Footer() {
-  return (
-    <Card body bg="secondary" className="text-light text-center mt-3">
-      Footer
-    </Card>
-  );
+  return <Box>Footer</Box>;
 }
 
 Footer.propTypes = {};

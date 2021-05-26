@@ -10,6 +10,10 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
+import Box from 'components/Box';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+
 export function Latest() {
   return (
     <div>
@@ -18,7 +22,11 @@ export function Latest() {
         <meta name="description" content="Description of Latest" />
       </Helmet>
 
-      <h1>Latest Page</h1>
+      <Header />
+      <hr />
+      <Box>Collections</Box>
+      <hr />
+      <Footer />
     </div>
   );
 }
