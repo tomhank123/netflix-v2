@@ -12,6 +12,7 @@ import { compose } from 'redux';
 
 import collectionsData from 'fixtures/collections';
 
+import { Container } from 'react-bootstrap';
 import SelectProfiles from 'containers/SelectProfiles';
 import NewCollections from 'components/NewCollections';
 import Header from 'components/Header';
@@ -27,9 +28,11 @@ export function Latest() {
 
       <SelectProfiles>
         <Header />
-        <NewCollections collections={collectionsData} />
-        <hr />
-        <Footer />
+        <Container fluid>
+          <NewCollections collections={collectionsData} />
+          <hr />
+          <Footer />
+        </Container>
       </SelectProfiles>
     </div>
   );

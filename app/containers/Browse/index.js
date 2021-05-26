@@ -13,6 +13,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import collectionsData from 'fixtures/collections';
 
+import { Container } from 'react-bootstrap';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import NewCollections from 'components/NewCollections';
@@ -28,9 +29,11 @@ export function Browse() {
   return (
     <React.Fragment>
       <Header />
-      <NewCollections collections={collectionsData} />
-      <hr />
-      <Footer />
+      <Container fluid>
+        <NewCollections collections={collectionsData} />
+        <hr />
+        <Footer />
+      </Container>
     </React.Fragment>
   );
 }

@@ -16,6 +16,7 @@ import SelectProfiles from 'containers/SelectProfiles';
 import NewCollections from 'components/NewCollections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import { Container } from 'react-bootstrap';
 
 export function MyList() {
   return (
@@ -27,9 +28,11 @@ export function MyList() {
 
       <SelectProfiles>
         <Header />
-        <NewCollections collections={singleCollection} />
-        <hr />
-        <Footer />
+        <Container fluid>
+          <NewCollections collections={singleCollection} />
+          <hr />
+          <Footer />
+        </Container>
       </SelectProfiles>
     </div>
   );

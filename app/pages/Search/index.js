@@ -17,6 +17,7 @@ import NewCollections from 'components/NewCollections';
 import Box from 'components/Box';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import { Container } from 'react-bootstrap';
 
 export function Search() {
   return (
@@ -28,11 +29,13 @@ export function Search() {
 
       <SelectProfiles>
         <Header />
-        <hr />
-        <Box>Explore titles related to: Keyword A | Keyword B</Box>
-        <NewCollections collections={singleCollection} />
-        <hr />
-        <Footer />
+        <Container fluid>
+          <hr />
+          <Box>Explore titles related to: Keyword A | Keyword B</Box>
+          <NewCollections collections={singleCollection} />
+          <hr />
+          <Footer />
+        </Container>
       </SelectProfiles>
     </div>
   );
