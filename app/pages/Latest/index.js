@@ -30,7 +30,6 @@ export function Latest() {
         <Header />
         <Container fluid>
           <NewCollections collections={collectionsData} />
-          <hr />
           <Footer />
         </Container>
       </SelectProfiles>

@@ -11,7 +11,6 @@ import Box from 'components/Box';
 function Billboard({ item }) {
   return item ? (
     <React.Fragment>
-      <div className="mt-3" />
       <Box>Billboard</Box>
     </React.Fragment>
   ) : null;

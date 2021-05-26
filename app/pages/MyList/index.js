@@ -30,7 +30,6 @@ export function MyList() {
         <Header />
         <Container fluid>
           <NewCollections collections={singleCollection} />
-          <hr />
           <Footer />
         </Container>
       </SelectProfiles>

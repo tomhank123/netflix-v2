@@ -31,7 +31,6 @@ export function Browse() {
       <Header />
       <Container fluid>
         <NewCollections collections={collectionsData} />
-        <hr />
         <Footer />
       </Container>
     </React.Fragment>

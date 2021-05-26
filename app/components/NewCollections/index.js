@@ -49,9 +49,8 @@ function NewCollections({ collections }) {
 
       {filteredColls &&
         filteredColls.map(({ id, title, data }) => (
-          <React.Fragment key={id}>
-            <hr />
-            <h4>{title}</h4>
+          <section key={id} className="mt-3">
+            <h5>{title}</h5>
             <Swiper {...swiperOptions}>
               {data &&
                 data.map(movie => (
@@ -60,7 +59,7 @@ function NewCollections({ collections }) {
                   </SwiperSlide>
                 ))}
             </Swiper>
-          </React.Fragment>
+          </section>
         ))}
     </Wrapper>
   );

@@ -30,10 +30,9 @@ export function Search() {
       <SelectProfiles>
         <Header />
         <Container fluid>
-          <hr />
+          <div className="mt-3" />
           <Box>Explore titles related to: Keyword A | Keyword B</Box>
           <NewCollections collections={singleCollection} />
-          <hr />
           <Footer />
         </Container>
       </SelectProfiles>
