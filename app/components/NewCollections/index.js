@@ -6,17 +6,42 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import NewMovie from 'components/NewMovie';
 import Billboard from 'components/Billboard';
 
 import { getCollections } from './helpers';
-
-import MovieList from './MovieList';
 import Wrapper from './Wrapper';
 
 function NewCollections({ collections }) {
   const [billboard, filteredColls] = getCollections(collections);
+  const swiperOptions = {
+    spaceBetween: 16,
+    slidesPerView: 3,
+    // onSlideChange: () => console.log('slide change'),
+    // onSwiper: swiper => console.log(swiper),
+    loop: true,
+    freeMode: true,
+    breakpoints: {
+      '@0.00': {
+        slidesPerView: 3,
+        spaceBetween: 8,
+      },
+      '@0.75': {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+      '@1.00': {
+        slidesPerView: 4,
+        spaceBetween: 12,
+      },
+      '@1.50': {
+        slidesPerView: 6,
+        spaceBetween: 16,
+      },
+    },
+  };
 
   return (
     <Wrapper>
@@ -27,10 +52,14 @@ function NewCollections({ collections }) {
           <React.Fragment key={id}>
             <hr />
             <h4>{title}</h4>
-            <MovieList>
+            <Swiper {...swiperOptions}>
               {data &&
-                data.map(movie => <NewMovie key={movie.id} item={movie} />)}
-            </MovieList>
+                data.map(movie => (
+                  <SwiperSlide key={movie.id}>
+                    <NewMovie item={movie} />
+                  </SwiperSlide>
+                ))}
+            </Swiper>
           </React.Fragment>
         ))}
     </Wrapper>

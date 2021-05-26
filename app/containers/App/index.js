@@ -10,8 +10,9 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'swiper/swiper.min.css';
+import 'swiper/components/pagination/pagination.min.css';
 
-// import HomePage from 'containers/HomePage/Loadable';
 import BrowsePage from 'pages/Browse/Loadable';
 import WatchPage from 'pages/Watch/Loadable';
 import LatestPage from 'pages/Latest/Loadable';
