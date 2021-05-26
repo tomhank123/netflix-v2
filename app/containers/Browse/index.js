@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -16,7 +16,6 @@ import collectionsData from 'fixtures/collections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import NewCollections from 'components/NewCollections';
-import SelectProfiles from 'containers/SelectProfiles';
 
 import makeSelectBrowse from './selectors';
 import reducer from './reducer';
@@ -26,17 +25,13 @@ export function Browse() {
   useInjectReducer({ key: 'browse', reducer });
   useInjectSaga({ key: 'browse', saga });
 
-  const [profile, setProfile] = useState(null);
-
-  return profile ? (
+  return (
     <React.Fragment>
       <Header />
       <NewCollections collections={collectionsData} />
       <hr />
       <Footer />
     </React.Fragment>
-  ) : (
-    <SelectProfiles setProfile={setProfile} />
   );
 }
 

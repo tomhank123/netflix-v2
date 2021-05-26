@@ -19,7 +19,7 @@ import {
 import * as ROUTES from 'utils/routes';
 import Wrapper from './Wrapper';
 
-function Header({ isFixed }) {
+function Header({ isFixed, readonly }) {
   return (
     <Wrapper>
       <Navbar
@@ -35,8 +35,8 @@ function Header({ isFixed }) {
             </strong>
           </strong>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" />
-        <Navbar.Collapse id="navbar-nav">
+        <Navbar.Toggle aria-controls="navbar-nav" hidden={readonly} />
+        <Navbar.Collapse id="navbar-nav" hidden={readonly}>
           <Nav className="mr-auto">
             <NavLink as={RouteLink} to={ROUTES.BROWSE}>
               Home
@@ -63,6 +63,7 @@ function Header({ isFixed }) {
 
 Header.propTypes = {
   isFixed: PropTypes.bool,
+  readonly: PropTypes.bool,
 };
 
 export default Header;

@@ -12,10 +12,11 @@ import { compose } from 'redux';
 
 import { singleCollection } from 'fixtures/collections';
 
+import SelectProfiles from 'containers/SelectProfiles';
+import NewCollections from 'components/NewCollections';
 import Box from 'components/Box';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import NewCollections from 'components/NewCollections';
 
 export function Search() {
   return (
@@ -25,12 +26,14 @@ export function Search() {
         <meta name="description" content="Description of Search" />
       </Helmet>
 
-      <Header />
-      <hr />
-      <Box>Explore titles related to: Keyword A | Keyword B</Box>
-      <NewCollections collections={singleCollection} />
-      <hr />
-      <Footer />
+      <SelectProfiles>
+        <Header />
+        <hr />
+        <Box>Explore titles related to: Keyword A | Keyword B</Box>
+        <NewCollections collections={singleCollection} />
+        <hr />
+        <Footer />
+      </SelectProfiles>
     </div>
   );
 }

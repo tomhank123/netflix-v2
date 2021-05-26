@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
+import SelectProfiles from 'containers/SelectProfiles';
 import BrowseContainer from 'containers/Browse';
 
 export function Browse() {
@@ -20,7 +21,9 @@ export function Browse() {
         <meta name="description" content="Description of Browse" />
       </Helmet>
 
-      <BrowseContainer />
+      <SelectProfiles>
+        <BrowseContainer />
+      </SelectProfiles>
     </div>
   );
 }

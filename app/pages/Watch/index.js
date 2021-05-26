@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
+import SelectProfiles from 'containers/SelectProfiles';
 import Box from 'components/Box';
 
 export function Watch() {
@@ -20,7 +21,9 @@ export function Watch() {
         <meta name="description" content="Description of Watch" />
       </Helmet>
 
-      <Box>Player</Box>
+      <SelectProfiles>
+        <Box>Player</Box>
+      </SelectProfiles>
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { compose } from 'redux';
 
 import { singleCollection } from 'fixtures/collections';
 
+import SelectProfiles from 'containers/SelectProfiles';
 import NewCollections from 'components/NewCollections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -24,10 +25,12 @@ export function MyList() {
         <meta name="description" content="Description of MyList" />
       </Helmet>
 
-      <Header />
-      <NewCollections collections={singleCollection} />
-      <hr />
-      <Footer />
+      <SelectProfiles>
+        <Header />
+        <NewCollections collections={singleCollection} />
+        <hr />
+        <Footer />
+      </SelectProfiles>
     </div>
   );
 }

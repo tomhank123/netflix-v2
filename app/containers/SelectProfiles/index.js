@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -15,10 +15,14 @@ import Box from 'components/Box';
 import Wrapper from './Wrapper';
 import List from './List';
 
-export function SelectProfiles({ setProfile }) {
+export function SelectProfiles({ children }) {
+  const [profile, setProfile] = useState(null);
+
+  if (!profile) return children;
+
   return (
     <React.Fragment>
-      <Header isFixed />
+      <Header isFixed readonly />
       <Wrapper>
         <h2 className="m-0">Who&apos;s Watching?</h2>
         <List>
@@ -37,7 +41,7 @@ export function SelectProfiles({ setProfile }) {
 }
 
 SelectProfiles.propTypes = {
-  setProfile: PropTypes.func,
+  children: PropTypes.node,
 };
 
 function mapDispatchToProps(dispatch) {

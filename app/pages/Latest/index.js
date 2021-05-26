@@ -12,6 +12,7 @@ import { compose } from 'redux';
 
 import collectionsData from 'fixtures/collections';
 
+import SelectProfiles from 'containers/SelectProfiles';
 import NewCollections from 'components/NewCollections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -24,10 +25,12 @@ export function Latest() {
         <meta name="description" content="Description of Latest" />
       </Helmet>
 
-      <Header />
-      <NewCollections collections={collectionsData} />
-      <hr />
-      <Footer />
+      <SelectProfiles>
+        <Header />
+        <NewCollections collections={collectionsData} />
+        <hr />
+        <Footer />
+      </SelectProfiles>
     </div>
   );
 }
