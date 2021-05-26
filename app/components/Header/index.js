@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { NavLink as RouteLink } from 'react-router-dom';
 import {
   Button,
@@ -19,10 +19,15 @@ import {
 import * as ROUTES from 'utils/routes';
 import Wrapper from './Wrapper';
 
-function Header() {
+function Header({ isFixed }) {
   return (
     <Wrapper>
-      <Navbar bg="secondary" variant="dark" expand="sm">
+      <Navbar
+        bg="secondary"
+        variant="dark"
+        expand="sm"
+        fixed={isFixed ? 'top' : null}
+      >
         <Navbar.Brand as={RouteLink} to="/">
           <strong>
             <strong>
@@ -46,7 +51,7 @@ function Header() {
               Search
             </NavLink>
           </Nav>
-          <Form inline hidden>
+          <Form inline className="d-none d-lg-block">
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-light">Search</Button>
           </Form>
@@ -56,6 +61,8 @@ function Header() {
   );
 }
 
-Header.propTypes = {};
+Header.propTypes = {
+  isFixed: PropTypes.bool,
+};
 
 export default Header;
