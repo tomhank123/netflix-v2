@@ -38,13 +38,25 @@ function Header({ isFixed, readonly }) {
         <Navbar.Toggle aria-controls="navbar-nav" hidden={readonly} />
         <Navbar.Collapse id="navbar-nav" hidden={readonly}>
           <Nav className="mr-auto">
-            <NavLink as={RouteLink} to={ROUTES.BROWSE}>
+            <NavLink exact as={RouteLink} to={ROUTES.BROWSE}>
               Home
             </NavLink>
-            <NavLink as={RouteLink} to={`${ROUTES.BROWSE}/genre/34399`}>
+            <NavLink
+              as={RouteLink}
+              to={`${ROUTES.BROWSE}/genre/34399`}
+              isActive={(match, location) =>
+                match || location.search === '?bc=34399'
+              }
+            >
               Movies
             </NavLink>
-            <NavLink as={RouteLink} to={`${ROUTES.BROWSE}/genre/83`}>
+            <NavLink
+              as={RouteLink}
+              to={`${ROUTES.BROWSE}/genre/83`}
+              isActive={(match, location) =>
+                match || location.search === '?bc=83'
+              }
+            >
               TV Shows
             </NavLink>
             <NavLink as={RouteLink} to={ROUTES.LATEST}>

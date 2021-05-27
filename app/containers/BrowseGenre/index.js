@@ -9,14 +9,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { matchPath } from 'react-router';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { Container } from 'react-bootstrap';
+import collectionsData from 'fixtures/collections';
 
-import Box from 'components/Box';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+import NewCollections from 'components/NewCollections';
+
 import makeSelectBrowseGenre from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -25,22 +30,24 @@ export function BrowseGenre({ location }) {
   useInjectReducer({ key: 'browseGenre', reducer });
   useInjectSaga({ key: 'browseGenre', saga });
 
-  const path = location.pathname || '';
-  const genreId = +path.split('/')[3];
+  const match = matchPath(location.pathname, {
+    path: '/browse/genre/:genreId',
+    exact: true,
+    strict: true,
+  });
+  const genreId = match ? +match.params.genreId : null;
 
-  // eslint-disable-next-line no-nested-ternary
-  return genreId === 34399 ? (
-    <Container>
-      <Box>Movies</Box>
-    </Container>
-  ) : genreId === 83 ? (
-    <Container>
-      <Box>TV Shows</Box>
-    </Container>
-  ) : (
-    <Container>
-      <Box>Genre</Box>
-    </Container>
+  return (
+    <React.Fragment>
+      <Header />
+      <Container fluid>
+        {genreId === 34399 && <h2>Movies {genreId}</h2>}
+        {genreId === 83 && <h2>TV Shows {genreId}</h2>}
+        {[34399, 83].every(id => id !== genreId) && <h2>Genres {genreId}</h2>}
+        <NewCollections isSwiper collections={collectionsData} />
+        <Footer />
+      </Container>
+    </React.Fragment>
   );
 }
 

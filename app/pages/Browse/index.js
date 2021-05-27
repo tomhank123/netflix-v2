@@ -5,25 +5,18 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { Switch, Route } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
 
-import * as ROUTES from 'utils/routes';
-import { makeSelectLocation } from 'containers/App/selectors';
-
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import SelectProfiles from 'containers/SelectProfiles';
 import BrowseGenre from 'containers/BrowseGenre';
 import BrowseContainer from 'containers/Browse';
 
-export function Browse({ location }) {
-  const path = location.pathname || '';
-  // eslint-disable-next-line no-console
-  console.log(path);
+export function Browse({ ...routeProps }) {
+  const { match } = routeProps;
 
   return (
     <div>
@@ -33,38 +26,29 @@ export function Browse({ location }) {
       </Helmet>
 
       <Switch>
-        <Route exact path={ROUTES.BROWSE}>
+        <Route exact path={match.path}>
           <SelectProfiles>
             <BrowseContainer />
           </SelectProfiles>
         </Route>
-        <Route path={`${ROUTES.BROWSE}/genre/:topicId`}>
+        <Route path={`${match.path}/genre/:genreId`}>
           <SelectProfiles>
             <BrowseGenre />
           </SelectProfiles>
         </Route>
-        <Route component={NotFoundPage} />
       </Switch>
     </div>
   );
 }
 
-Browse.propTypes = {
-  location: PropTypes.object,
-};
+Browse.propTypes = {};
 
-const mapStateToProps = createStructuredSelector({
-  location: makeSelectLocation(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+function mapDispatchToProps(/* dispatch */) {
+  return {};
 }
 
 const withConnect = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 );
 
