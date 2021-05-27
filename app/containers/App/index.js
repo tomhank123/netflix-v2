@@ -16,7 +16,6 @@ import 'swiper/components/pagination/pagination.min.css';
 import BrowsePage from 'pages/Browse/Loadable';
 import WatchPage from 'pages/Watch/Loadable';
 import LatestPage from 'pages/Latest/Loadable';
-import MyListPage from 'pages/MyList/Loadable';
 import SearchPage from 'pages/Search/Loadable';
 
 import MoviesHome from 'containers/MoviesHome/Loadable';
@@ -36,7 +35,6 @@ export default function App() {
         />
         <Route exact path={ROUTES.WATCH} component={WatchPage} />
         <Route exact path={ROUTES.LATEST} component={LatestPage} />
-        <Route exact path={ROUTES.MY_LIST} component={MyListPage} />
         <Route exact path={ROUTES.SEARCH} component={SearchPage} />
         <Route exact path={ROUTES.MOVIES} component={MoviesHome} />
         <Route component={NotFoundPage} />

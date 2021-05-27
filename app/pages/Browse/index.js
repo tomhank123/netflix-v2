@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { Switch, Route } from 'react-router-dom';
 
+import MyListPage from 'pages/MyList/Loadable';
 import SelectProfiles from 'containers/SelectProfiles';
 import BrowseGenre from 'containers/BrowseGenre';
 import BrowseContainer from 'containers/Browse';
@@ -29,6 +30,11 @@ export function Browse({ ...routeProps }) {
         <Route exact path={match.path}>
           <SelectProfiles>
             <BrowseContainer />
+          </SelectProfiles>
+        </Route>
+        <Route path={`${match.path}/my-list`}>
+          <SelectProfiles>
+            <MyListPage />
           </SelectProfiles>
         </Route>
         <Route path={`${match.path}/genre/:genreId`}>

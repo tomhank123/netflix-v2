@@ -7,16 +7,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RouteLink } from 'react-router-dom';
-import {
-  Button,
-  Form,
-  FormControl,
-  Nav,
-  NavLink,
-  Navbar,
-} from 'react-bootstrap';
+import { Nav, NavLink, Navbar } from 'react-bootstrap';
 
 import * as ROUTES from 'utils/routes';
+import SearchBarContainer from 'containers/SearchBar';
+
 import Wrapper from './Wrapper';
 
 function Header({ isFixed, readonly }) {
@@ -62,17 +57,11 @@ function Header({ isFixed, readonly }) {
             <NavLink as={RouteLink} to={ROUTES.LATEST}>
               New & Popular
             </NavLink>
-            <NavLink as={RouteLink} to={ROUTES.MY_LIST}>
+            <NavLink as={RouteLink} to={`${ROUTES.BROWSE}/my-list`}>
               My List
             </NavLink>
-            <NavLink as={RouteLink} to={ROUTES.SEARCH}>
-              Search
-            </NavLink>
           </Nav>
-          <Form inline className="d-none d-lg-block">
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-light">Search</Button>
-          </Form>
+          <SearchBarContainer />
         </Navbar.Collapse>
       </Navbar>
     </Wrapper>
