@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -18,8 +18,8 @@ export function SearchBar({ dispatch, location }) {
   const { pathname, search } = location;
   const [keyword, setKeyword] = useState(search.replace('?q=', ''));
 
-  useEffect(() => {
-    if (keyword) {
+  const onKeyUp = ({ target }) => {
+    if (target.value) {
       dispatch(push(`/search?q=${keyword}`));
       return;
     }
@@ -27,7 +27,7 @@ export function SearchBar({ dispatch, location }) {
     if (pathname === '/search') {
       dispatch(push('/browse'));
     }
-  }, [keyword]);
+  };
 
   return (
     <Form
@@ -40,6 +40,7 @@ export function SearchBar({ dispatch, location }) {
         placeholder="Search"
         className="mr-sm-2"
         value={keyword}
+        onKeyUp={onKeyUp}
         onChange={({ target }) => setKeyword(target.value || '')}
       />
     </Form>

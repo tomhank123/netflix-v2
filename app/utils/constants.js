@@ -7,3 +7,6 @@ export const API_KEY = '7147d7cc63fc5d30300f34c13fa0963c';
 export const REQUEST = 'REQUEST';
 export const SUCCESS = 'SUCCESS';
 export const FAILURE = 'FAILURE';
+
+export const GENRE_MOVIES_ID = 34399;
+export const GENRE_SERIES_ID = 83;

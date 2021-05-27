@@ -14,15 +14,17 @@ import { push } from 'connected-react-router';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { Form } from 'react-bootstrap';
+import { getGenreInfo } from 'utils/helpers';
 
 import Wrapper from './Wrapper';
 import makeSelectSelectGenres from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function SelectGenres({ genreId, dispatch }) {
+export function SelectGenres({ genreId, parentId, dispatch }) {
   useInjectReducer({ key: 'selectGenres', reducer });
   useInjectSaga({ key: 'selectGenres', saga });
+  const { isMovies, isSeries } = getGenreInfo(parentId, genreId);
 
   const onSelectGenre = ({ target }) => {
     dispatch(push(target.value));
@@ -30,16 +32,21 @@ export function SelectGenres({ genreId, dispatch }) {
 
   return (
     <Wrapper>
-      {genreId === 34399 && <h2>Movies {genreId}</h2>}
-      {genreId === 83 && <h2>TV Shows {genreId}</h2>}
-      {[34399, 83].every(id => id !== genreId) && <h2>Genres {genreId}</h2>}
+      {isMovies && <h2>Movies</h2>}
+      {isSeries && <h2>TV Shows</h2>}
 
       <Form inline className="d-none d-lg-block">
         <select className="form-control" onChange={onSelectGenre}>
-          <option value="/browse/genre/83">Gerne</option>
-          <option value="/browse/genre/811?bc=83">Actions</option>
-          <option value="/browse/genre/812?bc=83">Adventure</option>
-          <option value="/browse/genre/813?bc=83">Three</option>
+          <option value={`/browse/genre/${parentId || genreId}`}>Gerne</option>
+          <option value={`/browse/genre/811?bc=${parentId || genreId}`}>
+            Actions
+          </option>
+          <option value={`/browse/genre/812?bc=${parentId || genreId}`}>
+            Adventure
+          </option>
+          <option value={`/browse/genre/813?bc=${parentId || genreId}`}>
+            Three
+          </option>
         </select>
       </Form>
     </Wrapper>
@@ -48,6 +55,7 @@ export function SelectGenres({ genreId, dispatch }) {
 
 SelectGenres.propTypes = {
   genreId: PropTypes.number,
+  parentId: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
 };
 

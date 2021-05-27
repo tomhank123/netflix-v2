@@ -23,19 +23,19 @@ import Footer from 'components/Footer';
 
 import reducer from './reducer';
 import saga from './saga';
-import { getGenreId } from './helpers';
+import { getUrlParams } from './helpers';
 
 export function BrowseGenre({ location }) {
   useInjectReducer({ key: 'browseGenre', reducer });
   useInjectSaga({ key: 'browseGenre', saga });
 
-  const genreId = getGenreId(location);
+  const { genreId, parentId } = getUrlParams(location);
 
   return (
     <React.Fragment>
       <Header />
       <Container fluid>
-        <SelectGenresContainer genreId={genreId} />
+        <SelectGenresContainer genreId={genreId} parentId={parentId} />
         <NewCollections isSwiper collections={collectionsData} />
         <Footer />
       </Container>
