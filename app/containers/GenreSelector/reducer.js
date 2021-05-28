@@ -1,6 +1,6 @@
 /*
  *
- * SelectGenres reducer
+ * GenreSelector reducer
  *
  */
 import produce from 'immer';

@@ -1,6 +1,6 @@
 /*
  *
- * MyList reducer
+ * BrowseMyList reducer
  *
  */
 import produce from 'immer';

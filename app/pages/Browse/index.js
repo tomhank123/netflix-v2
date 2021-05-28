@@ -12,38 +12,38 @@ import { compose } from 'redux';
 import { Switch, Route } from 'react-router-dom';
 
 import BrowseGenreContainer from 'containers/BrowseGenre';
-import SelectProfiles from 'containers/SelectProfiles';
-import MyListContainer from 'containers/MyList';
+import BrowseMyListContainer from 'containers/BrowseMyList';
 import BrowseContainer from 'containers/Browse';
+import ProfileSelector from 'containers/ProfileSelector';
 
 export function Browse({ ...routeProps }) {
   const { match } = routeProps;
 
   return (
-    <div>
+    <React.Fragment>
       <Helmet>
         <title>Netflix</title>
         <meta name="description" content="Description of Browse" />
       </Helmet>
 
-      <Switch>
-        <Route exact path={match.path}>
-          <SelectProfiles>
-            <BrowseContainer />
-          </SelectProfiles>
-        </Route>
-        <Route path={`${match.path}/genre/:genreId`}>
-          <SelectProfiles>
-            <BrowseGenreContainer />
-          </SelectProfiles>
-        </Route>
-        <Route path={`${match.path}/my-list`}>
-          <SelectProfiles>
-            <MyListContainer />
-          </SelectProfiles>
-        </Route>
-      </Switch>
-    </div>
+      <ProfileSelector>
+        <Switch>
+          <Route
+            exact
+            path={match.path}
+            render={() => <BrowseContainer {...routeProps} />}
+          />
+          <Route
+            path={`${match.path}/genre/:genreId`}
+            render={() => <BrowseGenreContainer {...routeProps} />}
+          />
+          <Route
+            path={`${match.path}/my-list`}
+            render={() => <BrowseMyListContainer {...routeProps} />}
+          />
+        </Switch>
+      </ProfileSelector>
+    </React.Fragment>
   );
 }
 

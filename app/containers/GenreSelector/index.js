@@ -1,6 +1,6 @@
 /**
  *
- * SelectGenres
+ * GenreSelector
  *
  */
 
@@ -14,19 +14,22 @@ import { push } from 'connected-react-router';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { Form } from 'react-bootstrap';
-import { getGenreInfo } from 'utils/helpers';
+import { makeSelectLocation } from 'containers/App/selectors';
 
+import { getGenreInfo, getUrlParams } from './helpers';
 import Wrapper from './Wrapper';
 import makeSelectSelectGenres from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function SelectGenres({ genreId, parentId, dispatch }) {
+export function GenreSelector({ dispatch, location }) {
   useInjectReducer({ key: 'selectGenres', reducer });
   useInjectSaga({ key: 'selectGenres', saga });
+
+  const { genreId, parentId } = getUrlParams(location);
   const { isMovies, isSeries } = getGenreInfo(parentId, genreId);
 
-  const onSelectGenre = ({ target }) => {
+  const onSelectedGenre = ({ target }) => {
     dispatch(push(target.value));
   };
 
@@ -36,7 +39,7 @@ export function SelectGenres({ genreId, parentId, dispatch }) {
       {isSeries && <h2>TV Shows</h2>}
 
       <Form inline className="d-none d-lg-block">
-        <select className="form-control" onChange={onSelectGenre}>
+        <select className="form-control" onChange={onSelectedGenre}>
           <option value={`/browse/genre/${parentId || genreId}`}>Gerne</option>
           <option value={`/browse/genre/811?bc=${parentId || genreId}`}>
             Actions
@@ -53,14 +56,14 @@ export function SelectGenres({ genreId, parentId, dispatch }) {
   );
 }
 
-SelectGenres.propTypes = {
-  genreId: PropTypes.number,
-  parentId: PropTypes.number,
+GenreSelector.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectGenres: makeSelectSelectGenres(),
+  location: makeSelectLocation(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -74,4 +77,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(SelectGenres);
+export default compose(withConnect)(GenreSelector);

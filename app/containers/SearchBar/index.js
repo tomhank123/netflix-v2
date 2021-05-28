@@ -37,7 +37,7 @@ export function SearchBar({ dispatch, location }) {
     >
       <FormControl
         type="text"
-        placeholder="Search"
+        placeholder="Titles, people, genres"
         className="mr-sm-2"
         value={keyword}
         onKeyUp={onKeyUp}

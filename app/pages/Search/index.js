@@ -12,7 +12,7 @@ import { compose } from 'redux';
 
 import { singleCollection } from 'fixtures/collections';
 
-import SelectProfiles from 'containers/SelectProfiles';
+import ProfileSelector from 'containers/ProfileSelector';
 import NewCollections from 'components/NewCollections';
 import Box from 'components/Box';
 import Header from 'components/Header';
@@ -27,7 +27,7 @@ export function Search() {
         <meta name="description" content="Description of Search" />
       </Helmet>
 
-      <SelectProfiles>
+      <ProfileSelector>
         <Header />
         <Container fluid>
           <div className="mt-3" />
@@ -35,7 +35,7 @@ export function Search() {
           <NewCollections collections={singleCollection} />
           <Footer />
         </Container>
-      </SelectProfiles>
+      </ProfileSelector>
     </div>
   );
 }

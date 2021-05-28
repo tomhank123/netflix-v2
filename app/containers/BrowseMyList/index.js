@@ -1,6 +1,6 @@
 /**
  *
- * MyList
+ * BrowseMyList
  *
  */
 
@@ -23,7 +23,7 @@ import makeSelectMyList from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function MyList() {
+export function BrowseMyList() {
   useInjectReducer({ key: 'myList', reducer });
   useInjectSaga({ key: 'myList', saga });
 
@@ -38,7 +38,7 @@ export function MyList() {
   );
 }
 
-MyList.propTypes = {
+BrowseMyList.propTypes = {
   // dispatch: PropTypes.func.isRequired,
 };
 
@@ -57,4 +57,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(MyList);
+export default compose(withConnect)(BrowseMyList);

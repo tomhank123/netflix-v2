@@ -1,6 +1,6 @@
 /*
  *
- * MyList actions
+ * GenreSelector actions
  *
  */
 

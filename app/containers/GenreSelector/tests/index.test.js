@@ -1,6 +1,6 @@
 /**
  *
- * Tests for MyList
+ * Tests for GenreSelector
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -10,13 +10,13 @@ import React from 'react';
 import { render } from 'react-testing-library';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import { MyList } from '../index';
+import { GenreSelector } from '../index';
 
-describe('<MyList />', () => {
+describe('<GenreSelector />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     const dispatch = jest.fn();
-    render(<MyList dispatch={dispatch} />);
+    render(<GenreSelector dispatch={dispatch} />);
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -32,7 +32,7 @@ describe('<MyList />', () => {
   it.skip('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<MyList />);
+    } = render(<GenreSelector />);
     expect(firstChild).toMatchSnapshot();
   });
 });

@@ -1,6 +1,6 @@
 /*
  *
- * SelectGenres actions
+ * BrowseMyList actions
  *
  */
 

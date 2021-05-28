@@ -12,7 +12,7 @@ const selectSelectGenresDomain = state => state.selectGenres || initialState;
  */
 
 /**
- * Default selector used by SelectGenres
+ * Default selector used by GenreSelector
  */
 
 const makeSelectSelectGenres = () =>

@@ -1,6 +1,6 @@
 /**
  *
- * SelectProfiles
+ * ProfileSelector
  *
  */
 
@@ -15,7 +15,7 @@ import Box from 'components/Box';
 import Wrapper from './Wrapper';
 import List from './List';
 
-export function SelectProfiles({ children }) {
+export function ProfileSelector({ children }) {
   const [profile, setProfile] = useState(null);
 
   if (!profile) return children;
@@ -40,7 +40,7 @@ export function SelectProfiles({ children }) {
   );
 }
 
-SelectProfiles.propTypes = {
+ProfileSelector.propTypes = {
   children: PropTypes.node,
 };
 
@@ -55,4 +55,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(SelectProfiles);
+export default compose(withConnect)(ProfileSelector);

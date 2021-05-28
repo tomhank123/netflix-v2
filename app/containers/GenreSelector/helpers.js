@@ -1,5 +1,13 @@
 import { matchPath } from 'react-router';
 
+const checkGenreType = (parentId, genreId, compareId) => {
+  if (parentId) {
+    return parentId === compareId;
+  }
+
+  return genreId === compareId;
+};
+
 export const getUrlParams = ({ pathname, search }) => {
   const match = matchPath(pathname, {
     path: '/browse/genre/:genreId',
@@ -20,3 +28,8 @@ export const getUrlParams = ({ pathname, search }) => {
 
   return { genreId, parentId };
 };
+
+export const getGenreInfo = (parentId, genreId) => ({
+  isMovies: checkGenreType(parentId, genreId, 34399),
+  isSeries: checkGenreType(parentId, genreId, 83),
+});

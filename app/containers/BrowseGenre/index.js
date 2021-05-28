@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -15,27 +14,23 @@ import { compose } from 'redux';
 import { Container } from 'react-bootstrap';
 import collectionsData from 'fixtures/collections';
 
-import { makeSelectLocation } from 'containers/App/selectors';
-import SelectGenresContainer from 'containers/SelectGenres';
+import GenreSelector from 'containers/GenreSelector';
 import NewCollections from 'components/NewCollections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 import reducer from './reducer';
 import saga from './saga';
-import { getUrlParams } from './helpers';
 
-export function BrowseGenre({ location }) {
+export function BrowseGenre() {
   useInjectReducer({ key: 'browseGenre', reducer });
   useInjectSaga({ key: 'browseGenre', saga });
-
-  const { genreId, parentId } = getUrlParams(location);
 
   return (
     <React.Fragment>
       <Header />
       <Container fluid>
-        <SelectGenresContainer genreId={genreId} parentId={parentId} />
+        <GenreSelector />
         <NewCollections isSwiper collections={collectionsData} />
         <Footer />
       </Container>
@@ -43,13 +38,7 @@ export function BrowseGenre({ location }) {
   );
 }
 
-BrowseGenre.propTypes = {
-  location: PropTypes.object,
-};
-
-const mapStateToProps = createStructuredSelector({
-  location: makeSelectLocation(),
-});
+BrowseGenre.propTypes = {};
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -58,7 +47,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const withConnect = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 );
 

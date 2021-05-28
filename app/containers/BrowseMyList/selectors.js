@@ -12,7 +12,7 @@ const selectMyListDomain = state => state.myList || initialState;
  */
 
 /**
- * Default selector used by MyList
+ * Default selector used by BrowseMyList
  */
 
 const makeSelectMyList = () =>

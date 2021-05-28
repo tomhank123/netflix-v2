@@ -11,7 +11,6 @@ import { Helmet } from 'react-helmet';
 import Container from 'react-bootstrap/Container';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import Collections from 'components/Collections';
 
 export default function HomePage() {
   return (
@@ -22,7 +21,6 @@ export default function HomePage() {
       </Helmet>
       <Header />
       <Container>
-        <Collections collections={[]} />
         <Footer />
       </Container>
     </div>

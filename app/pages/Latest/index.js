@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import collectionsData from 'fixtures/collections';
 
 import { Container } from 'react-bootstrap';
-import SelectProfiles from 'containers/SelectProfiles';
+import ProfileSelector from 'containers/ProfileSelector';
 import NewCollections from 'components/NewCollections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -26,13 +26,13 @@ export function Latest() {
         <meta name="description" content="Description of Latest" />
       </Helmet>
 
-      <SelectProfiles>
+      <ProfileSelector>
         <Header />
         <Container fluid>
           <NewCollections isSwiper collections={collectionsData} />
           <Footer />
         </Container>
-      </SelectProfiles>
+      </ProfileSelector>
     </div>
   );
 }
