@@ -51,7 +51,7 @@ export function SearchBar({ dispatch, location }) {
         ref={inputEl}
         type="text"
         placeholder="Titles, people, genres"
-        className="mr-sm-2"
+        className="border-0 rounded-0"
         value={keyword}
         onKeyUp={onKeyUp}
         onChange={({ target }) => setKeyword(target.value || '')}
