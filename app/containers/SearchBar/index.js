@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -16,18 +16,30 @@ import { Form, FormControl } from 'react-bootstrap';
 
 export function SearchBar({ dispatch, location }) {
   const { pathname, search } = location;
+  const inputEl = useRef(null);
   const [keyword, setKeyword] = useState(search.replace('?q=', ''));
 
   const onKeyUp = ({ target }) => {
     if (target.value) {
-      dispatch(push(`/search?q=${keyword}`));
-      return;
-    }
+      const state = location.state || location;
 
-    if (pathname === '/search') {
-      dispatch(push('/browse'));
+      dispatch(push(`/search?q=${keyword}`, state));
     }
   };
+
+  useEffect(() => {
+    if (pathname === '/search' && !keyword) {
+      const returnUrl = location.state ? location.state.pathname : 'browse';
+
+      dispatch(push(returnUrl));
+    }
+  }, [keyword]);
+
+  useEffect(() => {
+    if (pathname === '/search') {
+      inputEl.current.focus();
+    }
+  }, [pathname]);
 
   return (
     <Form
@@ -36,6 +48,7 @@ export function SearchBar({ dispatch, location }) {
       onSubmit={event => event.preventDefault()}
     >
       <FormControl
+        ref={inputEl}
         type="text"
         placeholder="Titles, people, genres"
         className="mr-sm-2"
