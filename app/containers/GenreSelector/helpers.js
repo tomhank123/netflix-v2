@@ -1,4 +1,5 @@
 import { matchPath } from 'react-router';
+import queryString from 'query-string';
 
 const checkGenreType = (parentId, genreId, compareId) => {
   if (parentId) {
@@ -19,7 +20,8 @@ export const getUrlParams = ({ pathname, search }) => {
   let genreId = null;
 
   if (search) {
-    parentId = +search.replace('?bc=', '');
+    const { bc } = queryString.parse(search);
+    parentId = +bc;
   }
 
   if (match) {
