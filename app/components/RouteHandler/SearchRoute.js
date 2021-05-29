@@ -9,13 +9,18 @@ import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import queryString from 'query-string';
 
-const RedirectComponent = ({ location }) => (
-  <Redirect
-    to={{
-      pathname: location.state ? location.state.pathname : 'browse',
-    }}
-  />
-);
+const RedirectComponent = ({ location }) => {
+  const fromPath = {
+    pathname: '/',
+  };
+
+  if (location.state) {
+    fromPath.pathname = location.state.pathname;
+    fromPath.search = location.state.search;
+  }
+
+  return <Redirect to={fromPath} />;
+};
 
 RedirectComponent.propTypes = {
   location: PropTypes.object,

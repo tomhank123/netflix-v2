@@ -10,20 +10,22 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { push } from 'connected-react-router';
 import { createStructuredSelector } from 'reselect';
+import { useInjectReducer } from 'utils/injectReducer';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 import { Form, FormControl } from 'react-bootstrap';
+import { makeSelectKeyword } from './selectors';
+import reducer from './reducer';
+import { changeKeyword } from './actions';
 
-export function SearchBar({ dispatch, location }) {
-  const { pathname, search } = location;
+const key = 'searchbar';
+
+export function SearchBar({ location, onChangeKeyword, selectKeyword }) {
+  useInjectReducer({ key, reducer });
+
+  const { pathname } = location;
   const inputEl = useRef(null);
-  const [keyword, setKeyword] = useState(search.replace('?q=', ''));
-
-  const onKeyUp = () => {
-    const state = location.state || location;
-
-    dispatch(push(`/search?q=${keyword}`, state));
-  };
+  const [keyword, setKeyword] = useState(selectKeyword);
 
   useEffect(() => {
     if (pathname === '/search') {
@@ -43,7 +45,7 @@ export function SearchBar({ dispatch, location }) {
         placeholder="Titles, people, genres"
         className="border-0 rounded-0"
         value={keyword}
-        onKeyUp={onKeyUp}
+        onKeyUp={evt => onChangeKeyword(evt, location)}
         onChange={({ target }) => setKeyword(target.value || '')}
       />
     </Form>
@@ -51,17 +53,25 @@ export function SearchBar({ dispatch, location }) {
 }
 
 SearchBar.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   location: PropTypes.object,
+  onChangeKeyword: PropTypes.func,
+  selectKeyword: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   location: makeSelectLocation(),
+  selectKeyword: makeSelectKeyword(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onChangeKeyword: (evt, location) => {
+      const state = location.state || location;
+      const keyword = evt.target.value || '';
+
+      dispatch(changeKeyword(keyword));
+      dispatch(push(`/search?q=${keyword}`, state));
+    },
   };
 }
 
