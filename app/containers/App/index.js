@@ -18,13 +18,12 @@ import WatchPage from 'pages/Watch/Loadable';
 import LatestPage from 'pages/Latest/Loadable';
 import SearchPage from 'pages/Search/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import RouteHandler from 'components/RouteHandler';
 
 import * as ROUTES from 'utils/routes';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
-  const { SearchRoute } = ROUTES;
-
   return (
     <div>
       <Switch>
@@ -35,9 +34,9 @@ export default function App() {
         />
         <Route exact path={ROUTES.WATCH} component={WatchPage} />
         <Route exact path={ROUTES.LATEST} component={LatestPage} />
-        <SearchRoute exact path={ROUTES.SEARCH}>
+        <RouteHandler handler="SearchRoute" exact path={ROUTES.SEARCH}>
           <SearchPage />
-        </SearchRoute>
+        </RouteHandler>
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
