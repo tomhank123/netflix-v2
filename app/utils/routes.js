@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import queryString from 'query-string';
 
 export const HOME = '/';
 export const BROWSE = '/browse';
@@ -63,5 +64,41 @@ export function ProtectedRoute({ user, children, ...restProps }) {
 
 ProtectedRoute.propTypes = {
   user: PropTypes.object,
+  children: PropTypes.node,
+};
+
+const RedirectComponent = ({ location }) => (
+  <Redirect
+    to={{
+      pathname: location.state ? location.state.pathname : 'browse',
+    }}
+  />
+);
+
+RedirectComponent.propTypes = {
+  location: PropTypes.object,
+};
+
+export function SearchRoute({ children, ...restProps }) {
+  return (
+    <Route
+      {...restProps}
+      render={({ location }) => {
+        const { search } = location;
+
+        if (!search) {
+          return <RedirectComponent location={location} />;
+        }
+
+        const queries = queryString.parse(search);
+        const hasKey = queries.q;
+
+        return hasKey ? children : <RedirectComponent location={location} />;
+      }}
+    />
+  );
+}
+
+SearchRoute.propTypes = {
   children: PropTypes.node,
 };

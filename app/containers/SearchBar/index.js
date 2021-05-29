@@ -19,21 +19,11 @@ export function SearchBar({ dispatch, location }) {
   const inputEl = useRef(null);
   const [keyword, setKeyword] = useState(search.replace('?q=', ''));
 
-  const onKeyUp = ({ target }) => {
-    if (target.value) {
-      const state = location.state || location;
+  const onKeyUp = () => {
+    const state = location.state || location;
 
-      dispatch(push(`/search?q=${keyword}`, state));
-    }
+    dispatch(push(`/search?q=${keyword}`, state));
   };
-
-  useEffect(() => {
-    if (pathname === '/search' && !keyword) {
-      const returnUrl = location.state ? location.state.pathname : 'browse';
-
-      dispatch(push(returnUrl));
-    }
-  }, [keyword]);
 
   useEffect(() => {
     if (pathname === '/search') {

@@ -23,6 +23,8 @@ import * as ROUTES from 'utils/routes';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
+  const { SearchRoute } = ROUTES;
+
   return (
     <div>
       <Switch>
@@ -33,7 +35,9 @@ export default function App() {
         />
         <Route exact path={ROUTES.WATCH} component={WatchPage} />
         <Route exact path={ROUTES.LATEST} component={LatestPage} />
-        <Route exact path={ROUTES.SEARCH} component={SearchPage} />
+        <SearchRoute exact path={ROUTES.SEARCH}>
+          <SearchPage />
+        </SearchRoute>
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
