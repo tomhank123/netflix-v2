@@ -4,13 +4,15 @@
  *
  */
 
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 
 import { singleCollection } from 'fixtures/collections';
+import { makeSelectLocation } from 'containers/App/selectors';
 
 import ProfileSelector from 'containers/ProfileSelector';
 import NewCollections from 'components/NewCollections';
@@ -19,7 +21,19 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import { Container } from 'react-bootstrap';
 
-export function Search() {
+export function Search({ location }) {
+  const { pathname, search } = location;
+  const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const q = params.get('q');
+
+    if (pathname === '/search') {
+      setQuery(q || '');
+    }
+  }, [pathname, search]);
+
   return (
     <div>
       <Helmet>
@@ -31,7 +45,7 @@ export function Search() {
         <Header />
         <Container fluid>
           <div className="mt-3" />
-          <Box>Explore titles related to: Keyword A | Keyword B</Box>
+          <Box>Explore titles related to: {query} | Keyword B</Box>
           <NewCollections collections={singleCollection} />
           <Footer />
         </Container>
@@ -40,7 +54,13 @@ export function Search() {
   );
 }
 
-Search.propTypes = {};
+Search.propTypes = {
+  location: PropTypes.object,
+};
+
+const mapStateToProps = createStructuredSelector({
+  location: makeSelectLocation(),
+});
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -49,7 +69,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

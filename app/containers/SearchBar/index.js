@@ -14,24 +14,35 @@ import { useInjectReducer } from 'utils/injectReducer';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 import { Form, FormControl } from 'react-bootstrap';
-import { makeSelectKeyword } from './selectors';
 import reducer from './reducer';
-import { changeKeyword } from './actions';
 
 const key = 'searchbar';
 
-export function SearchBar({ location, onChangeKeyword, selectKeyword }) {
+export function SearchBar({ location, onChangeQuery }) {
   useInjectReducer({ key, reducer });
 
-  const { pathname } = location;
+  const { pathname, search } = location;
+  const [query, setQuery] = useState('');
   const inputEl = useRef(null);
-  const [keyword, setKeyword] = useState(selectKeyword);
 
   useEffect(() => {
     if (pathname === '/search') {
       inputEl.current.focus();
     }
   }, [pathname]);
+
+  useEffect(() => {
+    if (pathname === '/search') {
+      const params = new URLSearchParams(search);
+      const q = params.get('q');
+
+      setQuery(q || '');
+    }
+  }, []);
+
+  useEffect(() => {
+    onChangeQuery(query);
+  }, [query]);
 
   return (
     <Form
@@ -44,9 +55,8 @@ export function SearchBar({ location, onChangeKeyword, selectKeyword }) {
         type="text"
         placeholder="Titles, people, genres"
         className="border-0 rounded-0"
-        value={keyword}
-        onKeyUp={evt => onChangeKeyword(evt, location)}
-        onChange={({ target }) => setKeyword(target.value || '')}
+        value={query}
+        onChange={evt => setQuery(evt.target.value)}
       />
     </Form>
   );
@@ -54,23 +64,30 @@ export function SearchBar({ location, onChangeKeyword, selectKeyword }) {
 
 SearchBar.propTypes = {
   location: PropTypes.object,
-  onChangeKeyword: PropTypes.func,
-  selectKeyword: PropTypes.string,
+  onChangeQuery: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   location: makeSelectLocation(),
-  selectKeyword: makeSelectKeyword(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeKeyword: (evt, location) => {
-      const state = location.state || location;
-      const keyword = evt.target.value || '';
+    dispatch,
+    onChangeQuery: query => {
+      const params = new URLSearchParams();
 
-      dispatch(changeKeyword(keyword));
-      dispatch(push(`/search?q=${keyword}`, state));
+      if (query) {
+        params.append('q', query);
+      } else {
+        params.delete('q');
+      }
+
+      dispatch(
+        push({
+          search: params.toString(),
+        }),
+      );
     },
   };
 }

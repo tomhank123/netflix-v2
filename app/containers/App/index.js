@@ -18,7 +18,6 @@ import WatchPage from 'pages/Watch/Loadable';
 import LatestPage from 'pages/Latest/Loadable';
 import SearchPage from 'pages/Search/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import RouteHandler from 'components/RouteHandler';
 
 import * as ROUTES from 'utils/routes';
 import GlobalStyle from '../../global-styles';
@@ -34,9 +33,7 @@ export default function App() {
         />
         <Route exact path={ROUTES.WATCH} component={WatchPage} />
         <Route exact path={ROUTES.LATEST} component={LatestPage} />
-        <RouteHandler handler="SearchRoute" exact path={ROUTES.SEARCH}>
-          <SearchPage />
-        </RouteHandler>
+        <Route exact path={ROUTES.SEARCH} component={SearchPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
