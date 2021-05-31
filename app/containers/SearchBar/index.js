@@ -34,15 +34,6 @@ export function SearchBar({ location, onChangeQuery, onChangeUrl }) {
   }, [pathname]);
 
   useEffect(() => {
-    if (pathname === '/search') {
-      const params = new URLSearchParams(search);
-      const q = params.get('q');
-
-      setQuery(q || '');
-    }
-  }, []);
-
-  useEffect(() => {
     onChangeQuery(query, location);
   }, [query]);
 
@@ -52,6 +43,15 @@ export function SearchBar({ location, onChangeQuery, onChangeUrl }) {
 
     onChangeUrl(q, location);
   }, [debouncedQuery]);
+
+  useEffect(() => {
+    if (pathname === '/search') {
+      const params = new URLSearchParams(search);
+      const q = params.get('q');
+
+      setQuery(q || '');
+    }
+  }, []);
 
   return (
     <Form
