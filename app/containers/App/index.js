@@ -17,6 +17,7 @@ import BrowsePage from 'pages/Browse/Loadable';
 import WatchPage from 'pages/Watch/Loadable';
 import LatestPage from 'pages/Latest/Loadable';
 import SearchPage from 'pages/Search/Loadable';
+import LogoutPage from 'pages/Logout/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import * as ROUTES from 'utils/routes';
@@ -34,6 +35,7 @@ export default function App() {
         <Route exact path={ROUTES.WATCH} component={WatchPage} />
         <Route exact path={ROUTES.LATEST} component={LatestPage} />
         <Route exact path={ROUTES.SEARCH} component={SearchPage} />
+        <Route exact path={ROUTES.LOGOUT} component={LogoutPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

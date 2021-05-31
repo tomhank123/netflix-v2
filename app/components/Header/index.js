@@ -30,39 +30,43 @@ function Header({ isFixed, readonly }) {
             </strong>
           </strong>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" hidden={readonly} />
-        <Navbar.Collapse id="navbar-nav" hidden={readonly}>
-          <Nav className="mr-auto">
-            <NavLink exact as={RouteLink} to={ROUTES.BROWSE}>
-              Home
-            </NavLink>
-            <NavLink
-              as={RouteLink}
-              to={`${ROUTES.BROWSE}/genre/34399`}
-              isActive={(match, location) =>
-                match || location.search === '?bc=34399'
-              }
-            >
-              Movies
-            </NavLink>
-            <NavLink
-              as={RouteLink}
-              to={`${ROUTES.BROWSE}/genre/83`}
-              isActive={(match, location) =>
-                match || location.search === '?bc=83'
-              }
-            >
-              TV Shows
-            </NavLink>
-            <NavLink as={RouteLink} to={ROUTES.LATEST}>
-              New & Popular
-            </NavLink>
-            <NavLink as={RouteLink} to={`${ROUTES.BROWSE}/my-list`}>
-              My List
-            </NavLink>
-          </Nav>
-          <SearchBarContainer />
-        </Navbar.Collapse>
+        {!readonly && (
+          <React.Fragment>
+            <Navbar.Toggle aria-controls="navbar-nav" />
+            <Navbar.Collapse id="navbar-nav">
+              <Nav className="mr-auto">
+                <NavLink exact as={RouteLink} to={ROUTES.BROWSE}>
+                  Home
+                </NavLink>
+                <NavLink
+                  as={RouteLink}
+                  to={`${ROUTES.BROWSE}/genre/34399`}
+                  isActive={(match, location) =>
+                    match || location.search === '?bc=34399'
+                  }
+                >
+                  Movies
+                </NavLink>
+                <NavLink
+                  as={RouteLink}
+                  to={`${ROUTES.BROWSE}/genre/83`}
+                  isActive={(match, location) =>
+                    match || location.search === '?bc=83'
+                  }
+                >
+                  TV Shows
+                </NavLink>
+                <NavLink as={RouteLink} to={ROUTES.LATEST}>
+                  New & Popular
+                </NavLink>
+                <NavLink as={RouteLink} to={`${ROUTES.BROWSE}/my-list`}>
+                  My List
+                </NavLink>
+              </Nav>
+              <SearchBarContainer />
+            </Navbar.Collapse>
+          </React.Fragment>
+        )}
       </Navbar>
     </Wrapper>
   );
