@@ -11,6 +11,7 @@ import { compose } from 'redux';
 import { push } from 'connected-react-router';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
+import useDebounce from 'hooks/use-debounce';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 import { Form, FormControl } from 'react-bootstrap';
@@ -18,12 +19,13 @@ import reducer from './reducer';
 
 const key = 'searchbar';
 
-export function SearchBar({ location, onChangeQuery }) {
+export function SearchBar({ location, onChangeQuery, onChangeUrl }) {
   useInjectReducer({ key, reducer });
 
   const { pathname, search } = location;
   const [query, setQuery] = useState('');
   const inputEl = useRef(null);
+  const debouncedQuery = useDebounce(search, 300);
 
   useEffect(() => {
     if (pathname === '/search') {
@@ -41,8 +43,15 @@ export function SearchBar({ location, onChangeQuery }) {
   }, []);
 
   useEffect(() => {
-    onChangeQuery(query);
+    onChangeQuery(query, location);
   }, [query]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(debouncedQuery);
+    const q = params.get('q');
+
+    onChangeUrl(q, location);
+  }, [debouncedQuery]);
 
   return (
     <Form
@@ -65,6 +74,7 @@ export function SearchBar({ location, onChangeQuery }) {
 SearchBar.propTypes = {
   location: PropTypes.object,
   onChangeQuery: PropTypes.func,
+  onChangeUrl: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -74,10 +84,36 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    onChangeQuery: query => {
-      const params = new URLSearchParams();
+    onChangeUrl: (query, location) => {
+      const { pathname } = location;
+      const fromPath = {
+        pathname: '/',
+      };
+
+      if (location.state && location.state.pathname !== '/search') {
+        fromPath.pathname = location.state.pathname;
+        fromPath.search = location.state.search;
+      }
+
+      if (!query && pathname === '/search') {
+        dispatch(push(fromPath));
+      }
+
+      if (query && pathname !== '/search') {
+        dispatch(
+          push({
+            pathname: '/search',
+            search: `q=${query}`,
+            state: location.state || location,
+          }),
+        );
+      }
+    },
+    onChangeQuery: (query, location) => {
+      const params = new URLSearchParams(location.search);
 
       if (query) {
+        params.delete('q');
         params.append('q', query);
       } else {
         params.delete('q');
@@ -86,6 +122,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(
         push({
           search: params.toString(),
+          state: location.state || location,
         }),
       );
     },
