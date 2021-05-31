@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { singleCollection } from 'fixtures/collections';
 import { makeSelectLocation } from 'containers/App/selectors';
+import useDebounce from 'hooks/use-debounce';
 
 import ProfileSelector from 'containers/ProfileSelector';
 import NewCollections from 'components/NewCollections';
@@ -24,15 +25,23 @@ import { Container } from 'react-bootstrap';
 export function Search({ location }) {
   const { pathname, search } = location;
   const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 500);
 
   useEffect(() => {
     const params = new URLSearchParams(search);
     const q = params.get('q');
 
-    if (pathname === '/search') {
-      setQuery(q || '');
+    if (q) {
+      setQuery(q);
     }
   }, [pathname, search]);
+
+  useEffect(() => {
+    if (query) {
+      // eslint-disable-next-line no-console
+      console.log('Call API Here');
+    }
+  }, [debouncedQuery]);
 
   return (
     <div>
