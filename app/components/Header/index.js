@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RouteLink } from 'react-router-dom';
-import { Nav, NavLink, Navbar } from 'react-bootstrap';
+import { Nav, NavLink, Navbar, Button } from 'react-bootstrap';
 
 import * as ROUTES from 'utils/routes';
 import SearchBarContainer from 'containers/SearchBar';
@@ -30,10 +30,10 @@ function Header({ isFixed, readonly }) {
             </strong>
           </strong>
         </Navbar.Brand>
-        {!readonly && (
-          <React.Fragment>
-            <Navbar.Toggle aria-controls="navbar-nav" />
-            <Navbar.Collapse id="navbar-nav">
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav">
+          {!readonly && (
+            <React.Fragment>
               <Nav className="mr-auto">
                 <NavLink exact as={RouteLink} to={ROUTES.BROWSE}>
                   Home
@@ -64,9 +64,21 @@ function Header({ isFixed, readonly }) {
                 </NavLink>
               </Nav>
               <SearchBarContainer />
-            </Navbar.Collapse>
-          </React.Fragment>
-        )}
+            </React.Fragment>
+          )}
+
+          {readonly && (
+            <Button
+              className="ml-auto"
+              exact
+              as={RouteLink}
+              to={ROUTES.LOGIN}
+              activeClassName="d-none"
+            >
+              Sign In
+            </Button>
+          )}
+        </Navbar.Collapse>
       </Navbar>
     </Wrapper>
   );
