@@ -8,11 +8,12 @@
  */
 
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 
+import HomePage from 'pages/HomePage/Loadable';
 import BrowsePage from 'pages/Browse/Loadable';
 import WatchPage from 'pages/Watch/Loadable';
 import LatestPage from 'pages/Latest/Loadable';
@@ -28,7 +29,10 @@ export default function App() {
   return (
     <div>
       <Switch>
-        <Redirect exact from={ROUTES.HOME} to={ROUTES.BROWSE} />
+        {/*
+          <Redirect exact from={ROUTES.HOME} to={ROUTES.BROWSE} />
+        */}
+        <Route exact path={ROUTES.HOME} component={HomePage} />
         <Route
           path={ROUTES.BROWSE}
           render={routeProps => <BrowsePage {...routeProps} />}

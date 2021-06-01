@@ -41,9 +41,6 @@ export function Login() {
                   value={indentify}
                   onChange={({ target }) => setIndentify(target.checked)}
                 />
-                <Form.Text className="text-muted">
-                  We will never share your email with anyone else.
-                </Form.Text>
               </Form.Group>
 
               <Form.Group controlId="signInPassword">
