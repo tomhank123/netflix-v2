@@ -28,19 +28,23 @@ export function Logout() {
         />
       </Helmet>
 
-      <Header readonly />
-      <Card body>
-        <h2>Leaving So Soon?</h2>
-        <p>
-          Just so you know, you don’t always need to sign out of Netflix. It’s
-          only necessary if you’re on a shared or public computer.
-        </p>
-        <p>You’ll be redirected to the Netflix home page in 30 seconds.</p>
-        <Button block as={Link} to="/">
-          Go Now
-        </Button>
-      </Card>
-      <Footer />
+      <div className="inner">
+        <Header readonly />
+        <Card className="inner-card">
+          <Card.Body>
+            <h2>Leaving So Soon?</h2>
+            <p>
+              Just so you know, you don’t always need to sign out of Netflix.
+              It’s only necessary if you’re on a shared or public computer.
+            </p>
+            <p>You’ll be redirected to the Netflix home page in 30 seconds.</p>
+            <Button block as={Link} to="/" variant="info">
+              Go Now
+            </Button>
+          </Card.Body>
+        </Card>
+        <Footer />
+      </div>
     </Wrapper>
   );
 }

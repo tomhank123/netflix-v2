@@ -4,5 +4,5 @@ export const WATCH = '/watch';
 export const LATEST = '/latest';
 export const SEARCH = '/search';
 export const SIGN_UP = '/signup'; // /, /registration, /regform, /planform, /payment
-export const SIGN_IN = '/login';
+export const LOGIN = '/login';
 export const LOGOUT = '/logout';

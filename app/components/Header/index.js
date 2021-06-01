@@ -16,7 +16,7 @@ import Wrapper from './Wrapper';
 
 function Header({ isFixed, readonly }) {
   return (
-    <Wrapper>
+    <Wrapper id="header">
       <Navbar
         bg="secondary"
         variant="dark"

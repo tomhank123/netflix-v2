@@ -5,10 +5,16 @@
  */
 
 import React from 'react';
+
 import Box from 'components/Box';
+import Wrapper from './Wrapper';
 
 function Footer() {
-  return <Box>Footer</Box>;
+  return (
+    <Wrapper id="footer">
+      <Box>Footer</Box>
+    </Wrapper>
+  );
 }
 
 Footer.propTypes = {};
