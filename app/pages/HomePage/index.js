@@ -8,10 +8,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-import Container from 'react-bootstrap/Container';
+import { Card, Container } from 'react-bootstrap';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import { Card } from 'react-bootstrap';
 import OptForm from 'components/OptForm';
 
 import Wrapper from './Wrapper';
@@ -30,7 +29,7 @@ export default function HomePage() {
       <Card body bg="secondary" className="text-light text-center">
         <h2>Unlimited movies, TV shows, and more.</h2>
         <h4>Watch anywhere. Cancel anytime.</h4>
-        <OptForm />
+        <OptForm onGetStarted={() => {}} />
       </Card>
       <hr />
       <Card body bg="secondary" className="text-light text-left">

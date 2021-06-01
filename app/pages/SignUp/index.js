@@ -1,6 +1,6 @@
 /**
  *
- * Login
+ * SignUp
  *
  */
 
@@ -13,33 +13,32 @@ import { compose } from 'redux';
 import { Button, Card, Form } from 'react-bootstrap';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import * as ROUTES from 'utils/routes';
 import Wrapper from './Wrapper';
 
-export function Login() {
-  const [indentify, setIndentify] = useState('');
+export function SignUp() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isRemember, setIsRemember] = useState(false);
+  const [isDisagree, setIsDisagree] = useState(false);
 
   return (
     <Wrapper>
       <Helmet>
-        <title>Netflix</title>
-        <meta name="description" content="Description of Login" />
+        <title>Sign Up</title>
+        <meta name="description" content="Description of SignUp" />
       </Helmet>
-
       <div className="inner">
         <Header readonly />
         <Card className="inner-card">
           <Card.Body>
-            <h2>Sign In</h2>
+            <h2>Sign Up</h2>
             <Form>
               <Form.Group controlId="signInEmail">
-                <Form.Label>Email or phone number</Form.Label>
+                <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="text"
-                  value={indentify}
-                  onChange={({ target }) => setIndentify(target.value)}
+                  value={email}
+                  placeholder="Add a email"
+                  onChange={({ target }) => setEmail(target.value)}
                 />
               </Form.Group>
 
@@ -48,31 +47,22 @@ export function Login() {
                 <Form.Control
                   type="password"
                   value={password}
+                  placeholder="Add a password"
                   onChange={({ target }) => setPassword(target.value)}
                 />
               </Form.Group>
               <Form.Group controlId="signInRemember">
                 <Form.Check
                   type="checkbox"
-                  label="Remember me"
-                  checked={isRemember}
-                  onChange={({ target }) => setIsRemember(target.checked)}
+                  label="Please do not email me Netflix special offers"
+                  checked={isDisagree}
+                  onChange={({ target }) => setIsDisagree(target.checked)}
                 />
               </Form.Group>
               <Button variant="primary" type="submit" block>
-                Sign In
+                Sign Up
               </Button>
             </Form>
-            <hr />
-            <p>
-              New to Netflix?
-              <a href={ROUTES.SIGN_UP}> Sign up now.</a>
-            </p>
-            <p>
-              This page is protected by Google reCAPTCHA to ensure you are not a
-              bot.
-              <a href={ROUTES.HOME}> Learn more.</a>
-            </p>
           </Card.Body>
         </Card>
         <Footer />
@@ -81,7 +71,7 @@ export function Login() {
   );
 }
 
-Login.propTypes = {
+SignUp.propTypes = {
   // dispatch: PropTypes.func.isRequired,
 };
 
@@ -96,4 +86,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(Login);
+export default compose(withConnect)(SignUp);
