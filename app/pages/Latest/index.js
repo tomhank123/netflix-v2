@@ -29,7 +29,12 @@ export function Latest() {
       <ProfileSelector>
         <Header />
         <Container fluid>
-          <Collections isSwiper collections={collectionsData} />
+          <Collections
+            isSwiper
+            loading={false}
+            error={false}
+            items={collectionsData}
+          />
           <Footer />
         </Container>
       </ProfileSelector>

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import request from 'utils/request';
 import { REQUEST } from 'utils/constants';
-import { takeLatest, all, call, put } from 'redux-saga/effects';
+import { takeLatest, all, call, put, delay } from 'redux-saga/effects';
 import { COLLECTIONS, collections } from './actions';
 
 export function* fetchCollecttions() {
@@ -11,6 +11,8 @@ export function* fetchCollecttions() {
   const getPopular = `/movie/popular?page=1`;
   const getUpcoming = `/movie/upcoming?page=2`;
   const getTopRated = `/movie/top_rated?page=2`;
+
+  yield delay(2000);
 
   try {
     const [
@@ -63,8 +65,8 @@ export function* fetchCollecttions() {
         },
       ]),
     );
-  } catch (err) {
-    yield put(collections.failure(err));
+  } catch ({ message }) {
+    yield put(collections.failure(message));
   }
 }
 

@@ -31,7 +31,12 @@ export function BrowseGenre() {
       <Header />
       <Container fluid>
         <GenreSelector />
-        <Collections isSwiper collections={collectionsData} />
+        <Collections
+          isSwiper
+          loading={false}
+          error={false}
+          items={collectionsData}
+        />
         <Footer />
       </Container>
     </React.Fragment>

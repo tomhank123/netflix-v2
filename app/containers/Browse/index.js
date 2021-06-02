@@ -35,9 +35,7 @@ export function Browse({ collections, onLoadCollections }) {
     <React.Fragment>
       <Header />
       <Container fluid>
-        {collections.items && (
-          <Collections isSwiper collections={collections.items} />
-        )}
+        <Collections isSwiper {...collections} />
         <Footer />
       </Container>
     </React.Fragment>

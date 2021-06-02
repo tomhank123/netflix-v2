@@ -55,7 +55,7 @@ export function Search({ location }) {
         <Container fluid>
           <div className="mt-3" />
           <Box>Explore titles related to: {query} | Keyword B</Box>
-          <Collections collections={singleCollection} />
+          <Collections loading={false} error={false} items={singleCollection} />
           <Footer />
         </Container>
       </ProfileSelector>
