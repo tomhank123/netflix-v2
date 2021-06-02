@@ -16,7 +16,7 @@ import { makeSelectLocation } from 'containers/App/selectors';
 import useDebounce from 'hooks/use-debounce';
 
 import ProfileSelector from 'containers/ProfileSelector';
-import NewCollections from 'components/NewCollections';
+import Collections from 'components/Collections';
 import Box from 'components/Box';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -55,7 +55,7 @@ export function Search({ location }) {
         <Container fluid>
           <div className="mt-3" />
           <Box>Explore titles related to: {query} | Keyword B</Box>
-          <NewCollections collections={singleCollection} />
+          <Collections collections={singleCollection} />
           <Footer />
         </Container>
       </ProfileSelector>

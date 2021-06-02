@@ -14,7 +14,7 @@ import { singleCollection } from 'fixtures/collections';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
-import NewCollections from 'components/NewCollections';
+import Collections from 'components/Collections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import { Container } from 'react-bootstrap';
@@ -31,7 +31,7 @@ export function BrowseMyList() {
     <React.Fragment>
       <Header />
       <Container fluid>
-        <NewCollections collections={singleCollection} />
+        <Collections collections={singleCollection} />
         <Footer />
       </Container>
     </React.Fragment>

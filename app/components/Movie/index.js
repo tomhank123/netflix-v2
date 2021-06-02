@@ -7,18 +7,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
 
-import { getPoster } from './helpers';
+import * as ROUTES from 'utils/routes';
+
+import Box from 'components/Box';
 
 function Movie({ item }) {
-  const poster = getPoster(item.poster_path);
   return (
-    <Card className="border-0">
-      <Link to="/episodes" className="text-light">
-        <img className="mw-100" src={poster} alt={item.title} />
+    <Box style={{ height: 130 }}>
+      <Link to={`${ROUTES.WATCH}?id=${item.id}`} className="text-light">
+        {item.title}
       </Link>
-    </Card>
+    </Box>
   );
 }
 

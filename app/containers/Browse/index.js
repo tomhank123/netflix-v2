@@ -16,7 +16,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { Container } from 'react-bootstrap';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import NewCollections from 'components/NewCollections';
+import Collections from 'components/Collections';
 
 import * as actions from './actions';
 import { makeSelectCollections } from './selectors';
@@ -36,7 +36,7 @@ export function Browse({ collections, onLoadCollections }) {
       <Header />
       <Container fluid>
         {collections.items && (
-          <NewCollections isSwiper collections={collections.items} />
+          <Collections isSwiper collections={collections.items} />
         )}
         <Footer />
       </Container>

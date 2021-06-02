@@ -15,7 +15,7 @@ import { Container } from 'react-bootstrap';
 import collectionsData from 'fixtures/collections';
 
 import GenreSelector from 'containers/GenreSelector';
-import NewCollections from 'components/NewCollections';
+import Collections from 'components/Collections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
@@ -31,7 +31,7 @@ export function BrowseGenre() {
       <Header />
       <Container fluid>
         <GenreSelector />
-        <NewCollections isSwiper collections={collectionsData} />
+        <Collections isSwiper collections={collectionsData} />
         <Footer />
       </Container>
     </React.Fragment>

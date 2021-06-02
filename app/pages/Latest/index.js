@@ -14,7 +14,7 @@ import collectionsData from 'fixtures/collections';
 
 import { Container } from 'react-bootstrap';
 import ProfileSelector from 'containers/ProfileSelector';
-import NewCollections from 'components/NewCollections';
+import Collections from 'components/Collections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
@@ -29,7 +29,7 @@ export function Latest() {
       <ProfileSelector>
         <Header />
         <Container fluid>
-          <NewCollections isSwiper collections={collectionsData} />
+          <Collections isSwiper collections={collectionsData} />
           <Footer />
         </Container>
       </ProfileSelector>
