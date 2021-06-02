@@ -4,22 +4,46 @@
  *
  */
 
-import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
+import { push } from 'connected-react-router';
 
-import { Button, Card, Form } from 'react-bootstrap';
+import { Button, Card, Form, Alert } from 'react-bootstrap';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import { FirebaseContext } from 'context/firebase';
 import * as ROUTES from 'utils/routes';
 import Wrapper from './Wrapper';
 
-export function Login() {
+export function Login({ dispatch }) {
+  const { firebase } = useContext(FirebaseContext);
   const [indentify, setIndentify] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(false);
+  const [error, setError] = useState('');
+  const isInvalid = password === '' || indentify === '';
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    return firebase
+      .auth()
+      .signInWithEmailAndPassword(indentify, password)
+      .then(() => {
+        dispatch(push(ROUTES.BROWSE));
+      })
+      .catch(({ message }) => {
+        setError(message);
+      });
+  };
+
+  useEffect(() => {
+    setIndentify('minhduc.tran.sgu@gmail.co');
+    setPassword('2013asdf');
+  }, []);
 
   return (
     <Wrapper>
@@ -33,7 +57,10 @@ export function Login() {
         <Card className="inner-card">
           <Card.Body>
             <h2>Sign In</h2>
-            <Form>
+
+            {error && <Alert variant="warning">{error}</Alert>}
+
+            <Form onSubmit={handleSubmit}>
               <Form.Group controlId="signInEmail">
                 <Form.Label>Email or phone number</Form.Label>
                 <Form.Control
@@ -59,7 +86,12 @@ export function Login() {
                   onChange={({ target }) => setIsRemember(target.checked)}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" block>
+              <Button
+                variant="primary"
+                type="submit"
+                block
+                disabled={isInvalid}
+              >
                 Sign In
               </Button>
             </Form>
@@ -82,7 +114,7 @@ export function Login() {
 }
 
 Login.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
