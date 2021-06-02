@@ -3,11 +3,7 @@
  * Browse actions
  *
  */
+import { createAsyncAction, createRequestTypes } from 'utils/reduxHelpers';
 
-import { DEFAULT_ACTION } from './constants';
-
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const COLLECTIONS = createRequestTypes('app/Browse/COLLECTIONS');
+export const collections = createAsyncAction(COLLECTIONS);

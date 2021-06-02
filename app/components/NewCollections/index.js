@@ -24,8 +24,9 @@ function NewCollections({ isSwiper = false, collections }) {
       <Billboard item={billboard} />
 
       {filteredColls &&
-        filteredColls.map(({ id, title, data }) => (
-          <section key={id} className="mt-3">
+        filteredColls.map(({ id, title, data }, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <section key={`${id}-${index}`} className="mt-3">
             <h5>{title}</h5>
             {isSwiper ? (
               <Swiper {...swiperOptions}>
