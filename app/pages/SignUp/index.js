@@ -4,21 +4,56 @@
  *
  */
 
-import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
-import { Button, Card, Form } from 'react-bootstrap';
+import { Button, Card, Form, Alert } from 'react-bootstrap';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+
+import { FirebaseContext } from 'context/firebase';
+import * as ROUTES from 'utils/routes';
+
+import { push } from 'connected-react-router';
 import Wrapper from './Wrapper';
 
-export function SignUp() {
+export function SignUp({ dispatch }) {
+  const { firebase } = useContext(FirebaseContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisagree, setIsDisagree] = useState(false);
+  const [error, setError] = useState('');
+
+  const isInvalid = password === '' || email === '';
+
+  const handleSignup = event => {
+    event.preventDefault();
+
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(result =>
+        result.user
+          .updateProfile({
+            displayName: 'First Name',
+            photoURL: Math.floor(Math.random() * 5) + 1,
+          })
+          .then(() => {
+            dispatch(push(ROUTES.BROWSE));
+          }),
+      )
+      .catch(({ message }) => {
+        setError(message);
+      });
+  };
+
+  useEffect(() => {
+    setEmail('test123@gmail.com');
+    setPassword('test123');
+  }, []);
 
   return (
     <Wrapper>
@@ -31,8 +66,11 @@ export function SignUp() {
         <Card className="inner-card">
           <Card.Body>
             <h2>Sign Up</h2>
-            <Form>
-              <Form.Group controlId="signInEmail">
+
+            {error && <Alert variant="warning">{error}</Alert>}
+
+            <Form onSubmit={handleSignup} method="POST">
+              <Form.Group controlId="signUpEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="text"
@@ -42,7 +80,7 @@ export function SignUp() {
                 />
               </Form.Group>
 
-              <Form.Group controlId="signInPassword">
+              <Form.Group controlId="signUpPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
@@ -51,7 +89,7 @@ export function SignUp() {
                   onChange={({ target }) => setPassword(target.value)}
                 />
               </Form.Group>
-              <Form.Group controlId="signInRemember">
+              <Form.Group controlId="signUpRemember">
                 <Form.Check
                   type="checkbox"
                   label="Please do not email me Netflix special offers"
@@ -59,7 +97,12 @@ export function SignUp() {
                   onChange={({ target }) => setIsDisagree(target.checked)}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" block>
+              <Button
+                variant="primary"
+                type="submit"
+                block
+                disabled={isInvalid}
+              >
                 Sign Up
               </Button>
             </Form>
@@ -72,7 +115,7 @@ export function SignUp() {
 }
 
 SignUp.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {

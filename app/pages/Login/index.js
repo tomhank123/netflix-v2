@@ -60,7 +60,7 @@ export function Login({ dispatch }) {
 
             {error && <Alert variant="warning">{error}</Alert>}
 
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} method="POST">
               <Form.Group controlId="signInEmail">
                 <Form.Label>Email or phone number</Form.Label>
                 <Form.Control
