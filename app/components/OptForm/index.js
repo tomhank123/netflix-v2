@@ -29,10 +29,11 @@ function OptForm({ onGetStarted }) {
             <Form.Control
               placeholder="Email address"
               aria-label="Email address"
+              className="rounded-0"
               value={email}
               onChange={({ target }) => setEmail(target.value)}
             />
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="rounded-0">
               Get Started
             </Button>
           </InputGroup>
