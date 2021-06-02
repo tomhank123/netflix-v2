@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
+import { push } from 'connected-react-router';
 
 import { Button, Card, Form, Alert } from 'react-bootstrap';
 import Header from 'components/Header';
@@ -17,7 +18,6 @@ import Footer from 'components/Footer';
 import { FirebaseContext } from 'context/firebase';
 import * as ROUTES from 'utils/routes';
 
-import { push } from 'connected-react-router';
 import Wrapper from './Wrapper';
 
 export function SignUp({ dispatch }) {
