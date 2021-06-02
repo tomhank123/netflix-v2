@@ -22,7 +22,7 @@ export function ProfileSelector({ children }) {
 
   return (
     <React.Fragment>
-      <Header isFixed readonly />
+      <Header isFixed />
       <Wrapper>
         <h2 className="m-0">Who&apos;s Watching?</h2>
         <List>

@@ -23,7 +23,7 @@ export default function HomePage() {
         </title>
         <meta name="description" content="Description of SeriesHome" />
       </Helmet>
-      <Header readonly />
+      <Header />
       <Jumbotron className="mt-3 pt-3 border-top" />
       <hr />
       <Features />

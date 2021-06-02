@@ -9,13 +9,14 @@ import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import * as ROUTES from 'utils/routes';
 
-function ProtectedRoute({ user, children, ...restProps }) {
+function ProtectedRouteWithComponent({ user, component, ...restProps }) {
+  const Component = component;
   return (
     <Route
       {...restProps}
-      render={({ location }) => {
+      render={({ location, match }) => {
         if (user) {
-          return children;
+          return <Component match={match} />;
         }
 
         if (!user) {
@@ -35,9 +36,10 @@ function ProtectedRoute({ user, children, ...restProps }) {
   );
 }
 
-ProtectedRoute.propTypes = {
+ProtectedRouteWithComponent.propTypes = {
   user: PropTypes.object,
-  children: PropTypes.node,
+  // @TODO: React Node, type checking
+  component: PropTypes.any,
 };
 
-export default ProtectedRoute;
+export default ProtectedRouteWithComponent;

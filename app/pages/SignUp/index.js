@@ -62,7 +62,7 @@ export function SignUp({ dispatch }) {
         <meta name="description" content="Description of SignUp" />
       </Helmet>
       <div className="inner">
-        <Header readonly />
+        <Header />
         <Card className="inner-card">
           <Card.Body>
             <h2>Sign Up</h2>

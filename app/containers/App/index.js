@@ -22,28 +22,88 @@ import LogoutPage from 'pages/Logout/Loadable';
 import LoginPage from 'pages/Login/Loadable';
 import SignUpPage from 'pages/SignUp/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import RouteHandler from 'components/RouteHandler';
 
 import * as ROUTES from 'utils/routes';
+import { useAuthListener } from 'hooks';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
+  const { user } = useAuthListener();
+
   return (
     <div>
       <Switch>
         {/*
           <Redirect exact from={ROUTES.HOME} to={ROUTES.BROWSE} />
         */}
-        <Route exact path={ROUTES.HOME} component={HomePage} />
-        <Route
+        <RouteHandler
+          handler="ProtectedRouteWithComponent"
+          user={user}
           path={ROUTES.BROWSE}
-          render={routeProps => <BrowsePage {...routeProps} />}
+          component={BrowsePage}
         />
-        <Route exact path={ROUTES.WATCH} component={WatchPage} />
-        <Route exact path={ROUTES.LATEST} component={LatestPage} />
-        <Route exact path={ROUTES.SEARCH} component={SearchPage} />
-        <Route exact path={ROUTES.LOGIN} component={LoginPage} />
-        <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
-        <Route exact path={ROUTES.LOGOUT} component={LogoutPage} />
+        <RouteHandler
+          handler="ProtectedRoute"
+          exact
+          user={user}
+          path={ROUTES.WATCH}
+        >
+          <WatchPage />
+        </RouteHandler>
+        <RouteHandler
+          handler="ProtectedRoute"
+          exact
+          user={user}
+          path={ROUTES.LATEST}
+        >
+          <LatestPage />
+        </RouteHandler>
+        <RouteHandler
+          handler="ProtectedRoute"
+          exact
+          user={user}
+          path={ROUTES.SEARCH}
+        >
+          <SearchPage />
+        </RouteHandler>
+
+        <RouteHandler
+          handler="IsUserRedirect"
+          exact
+          user={user}
+          loggedInPath={ROUTES.BROWSE}
+          path={ROUTES.HOME}
+        >
+          <HomePage />
+        </RouteHandler>
+        <RouteHandler
+          handler="IsUserRedirect"
+          exact
+          user={user}
+          loggedInPath={ROUTES.BROWSE}
+          path={ROUTES.LOGIN}
+        >
+          <LoginPage />
+        </RouteHandler>
+        <RouteHandler
+          handler="IsUserRedirect"
+          exact
+          user={user}
+          loggedInPath={ROUTES.BROWSE}
+          path={ROUTES.SIGN_UP}
+        >
+          <SignUpPage />
+        </RouteHandler>
+        <RouteHandler
+          handler="IsUserRedirect"
+          exact
+          user={user}
+          loggedInPath={ROUTES.BROWSE}
+          path={ROUTES.LOGOUT}
+        >
+          <LogoutPage />
+        </RouteHandler>
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

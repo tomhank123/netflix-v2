@@ -11,7 +11,7 @@ import { compose } from 'redux';
 import { push } from 'connected-react-router';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
-import useDebounce from 'hooks/use-debounce';
+import { useDebounce } from 'hooks';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 import { Form, FormControl } from 'react-bootstrap';

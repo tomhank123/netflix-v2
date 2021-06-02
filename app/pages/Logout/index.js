@@ -29,7 +29,7 @@ export function Logout() {
       </Helmet>
 
       <div className="inner">
-        <Header readonly />
+        <Header />
         <Card className="inner-card">
           <Card.Body>
             <h2>Leaving So Soon?</h2>

@@ -4,17 +4,22 @@
  *
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RouteLink } from 'react-router-dom';
 import { Nav, NavLink, Navbar, Button } from 'react-bootstrap';
 
-import * as ROUTES from 'utils/routes';
 import SearchBarContainer from 'containers/SearchBar';
+import * as ROUTES from 'utils/routes';
+import { useAuthListener } from 'hooks';
+import { FirebaseContext } from 'context/firebase';
 
 import Wrapper from './Wrapper';
 
-function Header({ isFixed, readonly }) {
+function Header({ isFixed }) {
+  const { firebase } = useContext(FirebaseContext);
+  const { user: loggedInUser } = useAuthListener();
+
   return (
     <Wrapper id="header">
       <Navbar
@@ -32,7 +37,7 @@ function Header({ isFixed, readonly }) {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
-          {!readonly && (
+          {loggedInUser && (
             <React.Fragment>
               <Nav className="mr-auto">
                 <NavLink exact as={RouteLink} to={ROUTES.BROWSE}>
@@ -67,7 +72,7 @@ function Header({ isFixed, readonly }) {
             </React.Fragment>
           )}
 
-          {readonly && (
+          {!loggedInUser ? (
             <Button
               className="ml-auto"
               exact
@@ -76,6 +81,10 @@ function Header({ isFixed, readonly }) {
               activeClassName="d-none"
             >
               Sign In
+            </Button>
+          ) : (
+            <Button className="ml-3" onClick={() => firebase.auth().signOut()}>
+              Sign Out
             </Button>
           )}
         </Navbar.Collapse>
@@ -86,7 +95,6 @@ function Header({ isFixed, readonly }) {
 
 Header.propTypes = {
   isFixed: PropTypes.bool,
-  readonly: PropTypes.bool,
 };
 
 export default Header;
