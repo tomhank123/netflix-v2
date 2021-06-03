@@ -38,7 +38,7 @@ export function GenreSelector({ dispatch, location }) {
       {isMovies && <h2>Movies</h2>}
       {isSeries && <h2>TV Shows</h2>}
 
-      <Form inline className="d-none d-lg-block">
+      <Form inline>
         <select className="form-control" onChange={onSelectedGenre}>
           <option value={`/browse/genre/${parentId || genreId}`}>Gerne</option>
           <option value={`/browse/genre/811?bc=${parentId || genreId}`}>

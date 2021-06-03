@@ -14,9 +14,11 @@ function ProtectedRouteWithComponent({ user, component, ...restProps }) {
   return (
     <Route
       {...restProps}
-      render={({ location, match }) => {
+      render={routeProps => {
+        const { location } = routeProps;
+
         if (user) {
-          return <Component match={match} />;
+          return <Component {...routeProps} />;
         }
 
         if (!user) {
