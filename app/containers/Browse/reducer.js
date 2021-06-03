@@ -26,7 +26,7 @@ const browseReducer = (state = initialState, action) =>
       case COLLECTIONS[SUCCESS]:
         draft.collections.loading = false;
         draft.collections.error = false;
-        reduceFetchCollections(action.response, draft);
+        reduceCollections(action.response, draft);
         break;
 
       case COLLECTIONS[FAILURE]:
@@ -38,7 +38,7 @@ const browseReducer = (state = initialState, action) =>
 
 export default browseReducer;
 
-function reduceFetchCollections(response, draft) {
+function reduceCollections(response, draft) {
   draft.collections.items = response.map(({ title, data }) => ({
     title,
     data: data.results,

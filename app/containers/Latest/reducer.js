@@ -1,6 +1,6 @@
 /*
  *
- * BrowseGenre reducer
+ * Latest reducer
  *
  */
 import produce from 'immer';
@@ -16,7 +16,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const browseGenreReducer = (state = initialState, action) =>
+const latestReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case COLLECTIONS[REQUEST]:
@@ -36,7 +36,7 @@ const browseGenreReducer = (state = initialState, action) =>
     }
   });
 
-export default browseGenreReducer;
+export default latestReducer;
 
 function reduceCollections(response, draft) {
   draft.collections.items = response.map(({ title, data }) => ({

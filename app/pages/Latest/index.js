@@ -10,13 +10,8 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
-import collectionsData from 'fixtures/collections';
-
-import { Container } from 'react-bootstrap';
 import ProfileSelector from 'containers/ProfileSelector';
-import Collections from 'components/Collections';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import LatestContainer from 'containers/Latest';
 
 export function Latest() {
   return (
@@ -27,16 +22,7 @@ export function Latest() {
       </Helmet>
 
       <ProfileSelector>
-        <Header />
-        <Container fluid>
-          <Collections
-            isSwiper
-            loading={false}
-            error={false}
-            items={collectionsData}
-          />
-          <Footer />
-        </Container>
+        <LatestContainer />
       </ProfileSelector>
     </div>
   );
