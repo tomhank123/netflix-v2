@@ -1,6 +1,6 @@
 /**
  *
- * Tests for GenreSelector
+ * Tests for SelectGenres
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -10,13 +10,12 @@ import React from 'react';
 import { render } from 'react-testing-library';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import { GenreSelector } from '../index';
+import SelectGenres from '../index';
 
-describe('<GenreSelector />', () => {
+describe('<SelectGenres />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    const dispatch = jest.fn();
-    render(<GenreSelector dispatch={dispatch} />);
+    render(<SelectGenres />);
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -32,7 +31,7 @@ describe('<GenreSelector />', () => {
   it.skip('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<GenreSelector />);
+    } = render(<SelectGenres />);
     expect(firstChild).toMatchSnapshot();
   });
 });

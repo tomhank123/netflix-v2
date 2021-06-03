@@ -9,23 +9,29 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose, bindActionCreators } from 'redux';
+import { push } from 'connected-react-router';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { Container } from 'react-bootstrap';
 
-import GenreSelector from 'containers/GenreSelector';
+import SelectGenres from 'components/SelectGenres';
 import Collections from 'components/Collections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-import { getUrlParams } from './helpers';
+import { getUrlParams, getGenreInfo } from './helpers';
 import * as actions from './actions';
 import { makeSelectCollections } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function BrowseGenre({ collections, onLoadCollections, ...restProps }) {
+export function BrowseGenre({
+  collections,
+  onLoadCollections,
+  onSelectedGenre,
+  ...restProps
+}) {
   useInjectReducer({ key: 'browseGenre', reducer });
   useInjectSaga({ key: 'browseGenre', saga });
 
@@ -40,7 +46,12 @@ export function BrowseGenre({ collections, onLoadCollections, ...restProps }) {
     <React.Fragment>
       <Header />
       <Container fluid>
-        <GenreSelector />
+        <SelectGenres
+          genreId={genreId}
+          parentId={parentId}
+          onSelectedGenre={onSelectedGenre}
+          onGetGenreInfo={getGenreInfo}
+        />
         <Collections isSwiper {...collections} />
         <Footer />
       </Container>
@@ -51,6 +62,7 @@ export function BrowseGenre({ collections, onLoadCollections, ...restProps }) {
 BrowseGenre.propTypes = {
   collections: PropTypes.object,
   onLoadCollections: PropTypes.func,
+  onSelectedGenre: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -59,7 +71,15 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   const onLoadCollections = actions.collections.request;
-  return bindActionCreators({ onLoadCollections }, dispatch);
+
+  return {
+    ...bindActionCreators({ onLoadCollections }, dispatch),
+    onSelectedGenre: ({ target }) => {
+      if (target.value) {
+        dispatch(push(target.value));
+      }
+    },
+  };
 }
 
 const withConnect = connect(
