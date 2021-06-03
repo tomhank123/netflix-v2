@@ -8,21 +8,37 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { compose } from 'redux';
+import { compose, bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { singleCollection } from 'fixtures/collections';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+
 import { makeSelectLocation } from 'containers/App/selectors';
 import useDebounce from 'hooks/use-debounce';
 
+import { Container } from 'react-bootstrap';
 import ProfileSelector from 'containers/ProfileSelector';
 import Collections from 'components/Collections';
-import Box from 'components/Box';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import { Container } from 'react-bootstrap';
+import RelatedTitles from 'components/RelatedTitles';
 
-export function Search({ location }) {
+import * as actions from './actions';
+import { makeSelectCollections, makeSelectKeywords } from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+
+export function Search({
+  location,
+  keywords,
+  collections,
+  onLoadKeywords,
+  onLoadCollections,
+}) {
+  useInjectReducer({ key: 'search', reducer });
+  useInjectSaga({ key: 'search', saga });
+
   const { pathname, search } = location;
   const [query, setQuery] = useState('');
   const debouncedQuery = useDebounce(query, 500);
@@ -38,8 +54,8 @@ export function Search({ location }) {
 
   useEffect(() => {
     if (query) {
-      // eslint-disable-next-line no-console
-      console.log('Call API Here');
+      onLoadKeywords(query);
+      onLoadCollections(query);
     }
   }, [debouncedQuery]);
 
@@ -54,8 +70,8 @@ export function Search({ location }) {
         <Header />
         <Container fluid>
           <div className="mt-3" />
-          <Box>Explore titles related to: {query} | Keyword B</Box>
-          <Collections loading={false} error={false} items={singleCollection} />
+          <RelatedTitles {...keywords} />
+          <Collections {...collections} />
           <Footer />
         </Container>
       </ProfileSelector>
@@ -65,16 +81,29 @@ export function Search({ location }) {
 
 Search.propTypes = {
   location: PropTypes.object,
+  keywords: PropTypes.object,
+  collections: PropTypes.object,
+  onLoadKeywords: PropTypes.func,
+  onLoadCollections: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   location: makeSelectLocation(),
+  collections: makeSelectCollections(),
+  keywords: makeSelectKeywords(),
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
+  const onLoadCollections = actions.collections.request;
+  const onLoadKeywords = actions.keywords.request;
+
+  return bindActionCreators(
+    {
+      onLoadCollections,
+      onLoadKeywords,
+    },
     dispatch,
-  };
+  );
 }
 
 const withConnect = connect(
