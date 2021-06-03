@@ -22,12 +22,14 @@ import Footer from 'components/Footer';
 
 import { getUrlParams, getGenreInfo } from './helpers';
 import * as actions from './actions';
-import { makeSelectCollections } from './selectors';
+import { makeSelectCollections, makeSelectGenres } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
 export function BrowseGenre({
+  genres,
   collections,
+  onLoadGenres,
   onLoadCollections,
   onSelectedGenre,
   ...restProps
@@ -39,6 +41,7 @@ export function BrowseGenre({
   const { genreId, parentId } = getUrlParams(location);
 
   useEffect(() => {
+    onLoadGenres({ genreId, parentId });
     onLoadCollections({ genreId, parentId });
   }, [genreId, parentId]);
 
@@ -47,6 +50,7 @@ export function BrowseGenre({
       <Header />
       <Container fluid>
         <SelectGenres
+          {...genres}
           genreId={genreId}
           parentId={parentId}
           onSelectedGenre={onSelectedGenre}
@@ -60,25 +64,25 @@ export function BrowseGenre({
 }
 
 BrowseGenre.propTypes = {
+  genres: PropTypes.object,
   collections: PropTypes.object,
+  onLoadGenres: PropTypes.func,
   onLoadCollections: PropTypes.func,
   onSelectedGenre: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
+  genres: makeSelectGenres(),
   collections: makeSelectCollections(),
 });
 
 function mapDispatchToProps(dispatch) {
+  const onLoadGenres = actions.genres.request;
   const onLoadCollections = actions.collections.request;
 
   return {
-    ...bindActionCreators({ onLoadCollections }, dispatch),
-    onSelectedGenre: ({ target }) => {
-      if (target.value) {
-        dispatch(push(target.value));
-      }
-    },
+    ...bindActionCreators({ onLoadCollections, onLoadGenres }, dispatch),
+    onSelectedGenre: url => dispatch(push(url)),
   };
 }
 

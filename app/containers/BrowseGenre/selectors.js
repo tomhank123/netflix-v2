@@ -27,5 +27,11 @@ const makeSelectCollections = () =>
     substate => substate.collections,
   );
 
+const makeSelectGenres = () =>
+  createSelector(
+    selectBrowseGenreDomain,
+    substate => substate.genres,
+  );
+
 export default makeSelectBrowseGenre;
-export { makeSelectCollections };
+export { makeSelectCollections, makeSelectGenres };

@@ -5,10 +5,15 @@
  */
 import produce from 'immer';
 import { FAILURE, REQUEST, SUCCESS } from 'utils/constants';
-import { COLLECTIONS } from './actions';
+import { COLLECTIONS, GENRES } from './actions';
 
 export const initialState = {
   collections: {
+    loading: false,
+    error: false,
+    items: false,
+  },
+  genres: {
     loading: false,
     error: false,
     items: false,
@@ -33,6 +38,21 @@ const browseGenreReducer = (state = initialState, action) =>
         draft.collections.loading = false;
         draft.collections.error = action.response;
         break;
+
+      case GENRES[REQUEST]:
+        draft.genres.loading = true;
+        break;
+
+      case GENRES[SUCCESS]:
+        draft.genres.loading = false;
+        draft.genres.error = false;
+        reduceGenres(action.response, draft);
+        break;
+
+      case GENRES[FAILURE]:
+        draft.genres.loading = false;
+        draft.genres.error = action.response;
+        break;
     }
   });
 
@@ -43,4 +63,8 @@ function reduceCollections(response, draft) {
     title,
     data: data.results,
   }));
+}
+
+function reduceGenres({ genres }, draft) {
+  draft.genres.items = genres;
 }

@@ -2,7 +2,7 @@
 import request from 'utils/request';
 import { REQUEST } from 'utils/constants';
 import { takeLatest, all, call, put, delay } from 'redux-saga/effects';
-import { COLLECTIONS, collections } from './actions';
+import { COLLECTIONS, collections, GENRES, genres } from './actions';
 import { getGenreInfo } from './helpers';
 
 export function* fetchCollecttions({ request: { genreId, parentId } }) {
@@ -73,10 +73,30 @@ export function* fetchCollecttions({ request: { genreId, parentId } }) {
   }
 }
 
+export function* fetchGenres({ request: { genreId, parentId } }) {
+  const { isMovies } = getGenreInfo(parentId, genreId);
+  const type = isMovies ? 'movie' : 'tv';
+  const requestURL = `/genre/${type}/list`;
+
+  yield delay(2000);
+
+  try {
+    const responses = yield call(request, 'get', requestURL);
+
+    yield put(genres.success(responses));
+  } catch ({ message }) {
+    yield put(genres.failure(message));
+  }
+}
+
 export function* watchCollections() {
   yield takeLatest(COLLECTIONS[REQUEST], fetchCollecttions);
 }
 
+export function* watchGenres() {
+  yield takeLatest(GENRES[REQUEST], fetchGenres);
+}
+
 export default function* browseGenreSaga() {
-  yield all([watchCollections()]);
+  yield all([watchCollections(), watchGenres()]);
 }
