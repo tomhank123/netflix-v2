@@ -54,8 +54,8 @@ export function Search({
 
   useEffect(() => {
     if (query) {
-      onLoadKeywords(query);
-      onLoadCollections(query);
+      onLoadKeywords({ query });
+      onLoadCollections({ query });
     }
   }, [debouncedQuery]);
 

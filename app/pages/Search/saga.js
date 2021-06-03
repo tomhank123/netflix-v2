@@ -4,7 +4,7 @@ import { REQUEST } from 'utils/constants';
 import { takeLatest, all, call, put, delay } from 'redux-saga/effects';
 import { COLLECTIONS, collections, KEYWORDS, keywords } from './actions';
 
-export function* fetchCollecttions({ request: query }) {
+export function* fetchCollecttions({ request: { query } }) {
   const getMovies = `/search/movie?query=${query}&page=1`;
 
   yield delay(2000);
@@ -26,7 +26,7 @@ export function* fetchCollecttions({ request: query }) {
   }
 }
 
-export function* fetchKeywords({ request: query }) {
+export function* fetchKeywords({ request: { query } }) {
   const requestUrl = `/search/keyword?query=${query}&page=1`;
 
   yield delay(2000);
