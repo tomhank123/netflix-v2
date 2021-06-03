@@ -21,5 +21,11 @@ const makeSelectMyList = () =>
     substate => substate,
   );
 
+const makeSelectCollections = () =>
+  createSelector(
+    selectMyListDomain,
+    substate => substate.collections,
+  );
+
 export default makeSelectMyList;
-export { selectMyListDomain };
+export { makeSelectCollections };

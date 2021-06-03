@@ -4,10 +4,7 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import { createAsyncAction, createRequestTypes } from 'utils/reduxHelpers';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const COLLECTIONS = createRequestTypes('app/BrowseMyList/COLLECTIONS');
+export const collections = createAsyncAction(COLLECTIONS);
