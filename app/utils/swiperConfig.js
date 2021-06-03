@@ -3,8 +3,8 @@ export default {
   slidesPerView: 3,
   // onSlideChange: () => console.log('slide change'),
   // onSwiper: swiper => console.log(swiper),
-  loop: true,
-  freeMode: false,
+  loop: false,
+  freeMode: true,
   breakpoints: {
     '@0.00': {
       slidesPerView: 3,
