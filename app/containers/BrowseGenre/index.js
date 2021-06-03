@@ -19,6 +19,7 @@ import Collections from 'components/Collections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
+import { getUrlParams } from './helpers';
 import * as actions from './actions';
 import { makeSelectCollections } from './selectors';
 import reducer from './reducer';
@@ -29,10 +30,11 @@ export function BrowseGenre({ collections, onLoadCollections, ...restProps }) {
   useInjectSaga({ key: 'browseGenre', saga });
 
   const { location } = restProps;
+  const { genreId, parentId } = getUrlParams(location);
 
   useEffect(() => {
-    onLoadCollections();
-  }, [location]);
+    onLoadCollections({ genreId, parentId });
+  }, [genreId, parentId]);
 
   return (
     <React.Fragment>

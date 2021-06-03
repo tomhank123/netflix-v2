@@ -3,14 +3,17 @@ import request from 'utils/request';
 import { REQUEST } from 'utils/constants';
 import { takeLatest, all, call, put, delay } from 'redux-saga/effects';
 import { COLLECTIONS, collections } from './actions';
+import { getGenreInfo } from './helpers';
 
-export function* fetchCollecttions() {
-  const getOriginals = `/movie/popular?page=2`;
-  const getContinueWatching = `/movie/popular?page=3`;
-  const getTrendingNow = `/movie/popular?page=4`;
-  const getPopular = `/movie/popular?page=1`;
-  const getUpcoming = `/movie/upcoming?page=2`;
-  const getTopRated = `/movie/top_rated?page=2`;
+export function* fetchCollecttions({ request: { genreId, parentId } }) {
+  const { isMovies } = getGenreInfo(parentId, genreId);
+  const type = isMovies ? 'movie' : 'tv';
+  const getOriginals = `/${type}/popular?page=2`;
+  const getContinueWatching = `/${type}/popular?page=3`;
+  const getTrendingNow = `/${type}/popular?page=4`;
+  const getPopular = `/${type}/popular?page=1`;
+  const getUpcoming = `/${type}/popular?page=10`;
+  const getTopRated = `/${type}/top_rated?page=2`;
 
   yield delay(2000);
 

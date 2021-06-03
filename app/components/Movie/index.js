@@ -16,7 +16,7 @@ function Movie({ item }) {
   return (
     <Box style={{ height: 130 }}>
       <Link to={`${ROUTES.WATCH}?id=${item.id}`} className="text-light">
-        {item.title}
+        {item.title || item.name}
       </Link>
     </Box>
   );
