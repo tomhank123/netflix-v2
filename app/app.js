@@ -22,6 +22,11 @@ import App from 'containers/App';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
+// Import ThemeProvider
+
+import { ThemeProvider } from 'styled-components';
+import theme from 'utils/theme';
+
 // Import Firebase Provider
 import { FirebaseContext } from 'context/firebase';
 import { firebase } from './configureFirebase';
@@ -48,7 +53,9 @@ const render = messages => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <FirebaseContext.Provider value={{ firebase }}>
-            <App />
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
           </FirebaseContext.Provider>
         </ConnectedRouter>
       </LanguageProvider>
