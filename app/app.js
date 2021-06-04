@@ -25,6 +25,7 @@ import LanguageProvider from 'containers/LanguageProvider';
 // Import ThemeProvider
 
 import { ThemeProvider } from 'styled-components';
+import { SkeletonTheme } from 'react-loading-skeleton';
 import theme from 'utils/theme';
 
 // Import Firebase Provider
@@ -54,7 +55,9 @@ const render = messages => {
         <ConnectedRouter history={history}>
           <FirebaseContext.Provider value={{ firebase }}>
             <ThemeProvider theme={theme}>
-              <App />
+              <SkeletonTheme color="#202020" highlightColor="#444">
+                <App />
+              </SkeletonTheme>
             </ThemeProvider>
           </FirebaseContext.Provider>
         </ConnectedRouter>
