@@ -5,30 +5,30 @@ import { takeLatest, all, call, put, delay } from 'redux-saga/effects';
 import { COLLECTIONS, collections } from './actions';
 
 export function* fetchCollecttions() {
-  const getOriginals = `/movie/popular?page=2`;
-  const getContinueWatching = `/movie/popular?page=3`;
-  const getTrendingNow = `/movie/popular?page=4`;
-  const getPopular = `/movie/popular?page=1`;
-  const getUpcoming = `/movie/upcoming?page=2`;
-  const getTopRated = `/movie/top_rated?page=2`;
+  const getLatestSeries = `/tv/popular?page=2`;
+  const getLatestMovie = `/movie/popular?page=2`;
+  const getTrendingNow = '/trending/all/day';
+  const getWorthTheWait = `/trending/all/week?page=2`;
+  const getUpcomingDay = '/tv/airing_today';
+  const getUpcomingWeek = '/tv/on_the_air';
 
   yield delay(2000);
 
   try {
     const [
-      originals,
-      continueWatching,
+      latestSeries,
       trendingNow,
-      topRated,
-      popular,
-      upcoming,
+      latestMovies,
+      worthTheWait,
+      upcomingDay,
+      upcomingWeek,
     ] = yield all([
-      call(request, 'get', getOriginals),
-      call(request, 'get', getContinueWatching),
+      call(request, 'get', getLatestSeries),
       call(request, 'get', getTrendingNow),
-      call(request, 'get', getTopRated),
-      call(request, 'get', getPopular),
-      call(request, 'get', getUpcoming),
+      call(request, 'get', getLatestMovie),
+      call(request, 'get', getWorthTheWait),
+      call(request, 'get', getUpcomingDay),
+      call(request, 'get', getUpcomingWeek),
     ]);
 
     yield put(
@@ -36,32 +36,42 @@ export function* fetchCollecttions() {
         {
           id: 'New TV Shows',
           title: 'New TV Shows',
-          data: originals,
+          data: latestSeries,
         },
         {
           id: 'Top 10 in Vietnam Today',
           title: 'Top 10 in Vietnam Today',
-          data: continueWatching,
+          data: {
+            ...trendingNow,
+            results: trendingNow.results.filter(item =>
+              ['movie', 'tv'].includes(item.media_type),
+            ),
+          },
         },
         {
           id: 'New Movies',
           title: 'New Movies',
-          data: trendingNow,
+          data: latestMovies,
         },
         {
           id: 'Worth the Wait',
           title: 'Worth the Wait',
-          data: topRated,
+          data: {
+            ...worthTheWait,
+            results: worthTheWait.results.filter(item =>
+              ['movie', 'tv'].includes(item.media_type),
+            ),
+          },
         },
         {
           id: 'Coming This Week',
           title: 'Coming This Week',
-          data: popular,
+          data: upcomingDay,
         },
         {
           id: 'Coming Next Week',
           title: 'Coming Next Week',
-          data: upcoming,
+          data: upcomingWeek,
         },
       ]),
     );

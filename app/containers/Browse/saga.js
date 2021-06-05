@@ -5,29 +5,18 @@ import { takeLatest, all, call, put, delay } from 'redux-saga/effects';
 import { COLLECTIONS, collections } from './actions';
 
 export function* fetchCollecttions() {
-  const getOriginals = `/movie/popular?page=2`;
   // const getOriginals = `/discover/movie?sort_by=popularity.desc&include_adult=true&include_video=true&page=1&with_genres=28&with_keywords=moon`;
-  const getContinueWatching = `/movie/popular?page=3`;
-  const getTrendingNow = `/movie/popular?page=4`;
-  const getPopular = `/movie/popular?page=1`;
-  const getUpcoming = `/movie/upcoming?page=2`;
-  const getTopRated = `/movie/top_rated?page=2`;
+  const getTrendingNow = '/trending/all/day';
+  const getPopular = '/movie/popular';
+  const getUpcoming = '/movie/upcoming';
+  const getTopTen = '/movie/now_playing';
 
   yield delay(2000);
 
   try {
-    const [
-      originals,
-      continueWatching,
-      trendingNow,
-      topRated,
-      popular,
-      upcoming,
-    ] = yield all([
-      call(request, 'get', getOriginals),
-      call(request, 'get', getContinueWatching),
+    const [trendingNow, topTen, popular, upcoming] = yield all([
       call(request, 'get', getTrendingNow),
-      call(request, 'get', getTopRated),
+      call(request, 'get', getTopTen),
       call(request, 'get', getPopular),
       call(request, 'get', getUpcoming),
     ]);
@@ -35,24 +24,19 @@ export function* fetchCollecttions() {
     yield put(
       collections.success([
         {
-          id: 'Netflix Originals',
-          title: 'Netflix Originals',
-          data: originals,
-        },
-        {
-          id: 'Continue Watching for Me',
-          title: 'Continue Watching for Me',
-          data: continueWatching,
-        },
-        {
           id: 'Trending Now',
           title: 'Trending Now',
-          data: trendingNow,
+          data: {
+            ...trendingNow,
+            results: trendingNow.results.filter(item =>
+              ['movie', 'tv'].includes(item.media_type),
+            ),
+          },
         },
         {
           id: 'Top 10 in Vietnam Today',
           title: 'Top 10 in Vietnam Today',
-          data: topRated,
+          data: topTen,
         },
         {
           id: 'Popular on Netflix',

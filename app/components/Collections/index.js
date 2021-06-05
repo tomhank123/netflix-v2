@@ -37,7 +37,7 @@ function Collections({ isSwiper = false, loading, error, items }) {
               </Swiper>
             ) : (
               <MovieList>
-                {[7, 8, 9, 10, 11, 12].map(childId => (
+                {[7, 8, 9, 10, 11, 12, 13, 14, 15].map(childId => (
                   <Skeleton key={childId} wrapper="div" height={320} />
                 ))}
               </MovieList>

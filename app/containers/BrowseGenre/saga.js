@@ -8,53 +8,25 @@ import { getGenreInfo } from './helpers';
 export function* fetchCollecttions({ request: { genreId, parentId } }) {
   const { isMovies } = getGenreInfo(parentId, genreId);
   const type = isMovies ? 'movie' : 'tv';
-  const getOriginals = `/${type}/popular?page=2`;
-  const getContinueWatching = `/${type}/popular?page=3`;
-  const getTrendingNow = `/${type}/popular?page=4`;
-  const getPopular = `/${type}/popular?page=1`;
-  const getUpcoming = `/${type}/popular?page=10`;
-  const getTopRated = `/${type}/top_rated?page=2`;
+  const getTrendingNow = `/trending/${type}/day`;
+  const getPopular = `/${type}/popular`;
+  const getTopTen = isMovies ? `/${type}/now_playing` : `/${type}/airing_today`;
 
   yield delay(2000);
 
   try {
-    const [
-      originals,
-      continueWatching,
-      trendingNow,
-      topRated,
-      popular,
-      upcoming,
-    ] = yield all([
-      call(request, 'get', getOriginals),
-      call(request, 'get', getContinueWatching),
+    const [trendingNow, popular, topRated] = yield all([
       call(request, 'get', getTrendingNow),
-      call(request, 'get', getTopRated),
       call(request, 'get', getPopular),
-      call(request, 'get', getUpcoming),
+      call(request, 'get', getTopTen),
     ]);
 
     yield put(
       collections.success([
         {
-          id: 'Netflix Originals',
-          title: 'Netflix Originals',
-          data: originals,
-        },
-        {
-          id: 'Continue Watching for Me',
-          title: 'Continue Watching for Me',
-          data: continueWatching,
-        },
-        {
           id: 'Trending Now',
           title: 'Trending Now',
           data: trendingNow,
-        },
-        {
-          id: 'Top 10 in Vietnam Today',
-          title: 'Top 10 in Vietnam Today',
-          data: topRated,
         },
         {
           id: 'Popular on Netflix',
@@ -62,9 +34,12 @@ export function* fetchCollecttions({ request: { genreId, parentId } }) {
           data: popular,
         },
         {
-          id: 'Upcoming',
-          title: 'Upcoming',
-          data: upcoming,
+          id: 'Top 10 in Vietnam Today',
+          title: 'Top 10 in Vietnam Today',
+          data: {
+            ...topRated,
+            results: topRated.results.filter((_, index) => index < 10),
+          },
         },
       ]),
     );
