@@ -15,11 +15,11 @@ export default {
       spaceBetween: 10,
     },
     '@1.00': {
-      slidesPerView: 4,
+      slidesPerView: 7,
       spaceBetween: 12,
     },
     '@1.50': {
-      slidesPerView: 6,
+      slidesPerView: 9,
       spaceBetween: 16,
     },
   },

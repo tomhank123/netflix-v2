@@ -10,15 +10,21 @@ import { Link } from 'react-router-dom';
 
 import * as ROUTES from 'utils/routes';
 
-import Box from 'components/Box';
+import Wrapper from './Wrapper';
 
 function Movie({ item }) {
+  const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${
+    item.poster_path
+  }`;
+  const url = `${ROUTES.WATCH}?id=${item.id}`;
+  const title = item.title || item.name;
+
   return (
-    <Box style={{ height: 130 }}>
-      <Link to={`${ROUTES.WATCH}?id=${item.id}`} className="text-light">
-        {item.title || item.name}
+    <Wrapper>
+      <Link to={url} className="text-light">
+        <img src={poster} alt={title} className="mw-100" />
       </Link>
-    </Box>
+    </Wrapper>
   );
 }
 

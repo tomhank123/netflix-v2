@@ -25,20 +25,20 @@ function Collections({ isSwiper = false, loading, error, items }) {
     return (
       <React.Fragment>
         {[1, 2, 3, 4, 5, 6].map(id => (
-          <section className="mt-3" key={id}>
+          <section className="mt-5" key={id}>
             <Skeleton wrapper="h5" width={250} />
-            {!isSwiper ? (
+            {isSwiper ? (
               <Swiper {...swiperOptions}>
-                {[7, 8, 9, 10, 11, 12, 13, 14].map(childId => (
+                {[7, 8, 9, 10, 11, 12, 13, 14, 15].map(childId => (
                   <SwiperSlide key={childId}>
-                    <Skeleton wrapper="div" height={120} />
+                    <Skeleton wrapper="div" height={320} />
                   </SwiperSlide>
                 ))}
               </Swiper>
             ) : (
               <MovieList>
                 {[7, 8, 9, 10, 11, 12].map(childId => (
-                  <Skeleton key={childId} wrapper="div" height={120} />
+                  <Skeleton key={childId} wrapper="div" height={320} />
                 ))}
               </MovieList>
             )}
@@ -60,8 +60,8 @@ function Collections({ isSwiper = false, loading, error, items }) {
         {filteredColls &&
           filteredColls.map(({ id, title, data }, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <section key={`${id}-${index}`} className="mt-3">
-              <h5>{title}</h5>
+            <section key={`${id}-${index}`} className="mt-5">
+              <h5 className="font-weight-bold mt-4">{title}</h5>
               {isSwiper ? (
                 <Swiper {...swiperOptions}>
                   {data &&

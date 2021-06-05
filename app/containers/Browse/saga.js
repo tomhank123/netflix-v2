@@ -6,6 +6,7 @@ import { COLLECTIONS, collections } from './actions';
 
 export function* fetchCollecttions() {
   const getOriginals = `/movie/popular?page=2`;
+  // const getOriginals = `/discover/movie?sort_by=popularity.desc&include_adult=true&include_video=true&page=1&with_genres=28&with_keywords=moon`;
   const getContinueWatching = `/movie/popular?page=3`;
   const getTrendingNow = `/movie/popular?page=4`;
   const getPopular = `/movie/popular?page=1`;

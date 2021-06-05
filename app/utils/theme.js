@@ -18,7 +18,7 @@ export default {
     fontWeightBold: 700,
   },
   shape: {
-    borderRadius: 100,
+    borderRadius: 4,
   },
   pallete: {
     common: {
