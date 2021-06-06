@@ -10,22 +10,29 @@ import { NavLink as RouteLink } from 'react-router-dom';
 import {
   Nav,
   NavLink,
-  Button,
   NavDropdown,
   Form,
   Alert,
+  Image,
+  Button,
 } from 'react-bootstrap';
 import { FaBell, FaSlidersH, FaSearch } from 'react-icons/fa';
-import { BsPersonSquare } from 'react-icons/bs';
 
 import SearchBarContainer from 'containers/SearchBar';
 import * as ROUTES from 'utils/routes';
 import { useAuthListener } from 'hooks';
 import { FirebaseContext } from 'context/firebase';
 
+import Logo from 'images/logo.svg';
+import User1 from 'images/users/user1.png';
+import User2 from 'images/users/user2.png';
+import User3 from 'images/users/user3.png';
+import User4 from 'images/users/user4.png';
+import User5 from 'images/users/user5.png';
 import Wrapper from './Wrapper';
 import Navbar from './Navbar';
 import Dropdown from './Dropdown';
+import NavItems from './NavItems';
 
 function Header({ fixed }) {
   const { firebase } = useContext(FirebaseContext);
@@ -35,82 +42,18 @@ function Header({ fixed }) {
     <Wrapper>
       <Navbar fixed={fixed ? 'top' : null}>
         <Navbar.Brand as={RouteLink} to="/">
-          <strong>
-            <strong>
-              <strong className="text-danger h3">NETFLIX</strong>
-            </strong>
-          </strong>
+          <Image src={Logo} alt="Netflix Logo" height="40" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" />
-        <Navbar.Collapse id="navbar-nav">
-          {loggedInUser && (
+        <Navbar.Collapse>
+          {loggedInUser ? (
             <React.Fragment>
-              <Nav className="nav-mobile mr-auto align-items-center d-block d-md-none">
-                <NavDropdown
-                  title="Browse"
-                  menuvariant="dark"
-                  alignRight={false}
-                >
-                  <NavDropdown.Item exact as={RouteLink} to={ROUTES.BROWSE}>
-                    Home
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={RouteLink}
-                    to={`${ROUTES.BROWSE}/genre/83`}
-                    isActive={(match, location) =>
-                      match || location.search === '?bc=83'
-                    }
-                  >
-                    TV Shows
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={RouteLink}
-                    to={`${ROUTES.BROWSE}/genre/34399`}
-                    isActive={(match, location) =>
-                      match || location.search === '?bc=34399'
-                    }
-                  >
-                    Movies
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={RouteLink} to={ROUTES.LATEST}>
-                    New & Popular
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={RouteLink}
-                    to={`${ROUTES.BROWSE}/my-list`}
-                  >
-                    My List
-                  </NavDropdown.Item>
+              <Nav className="nav-primary mr-auto align-items-center d-block d-md-none">
+                <NavDropdown title="Browse" alignRight={false}>
+                  <NavItems component={NavDropdown.Item} />
                 </NavDropdown>
               </Nav>
               <Nav className="nav-primary mr-auto align-items-center d-none d-md-flex">
-                <NavLink exact as={RouteLink} to={ROUTES.BROWSE}>
-                  Home
-                </NavLink>
-                <NavLink
-                  as={RouteLink}
-                  to={`${ROUTES.BROWSE}/genre/83`}
-                  isActive={(match, location) =>
-                    match || location.search === '?bc=83'
-                  }
-                >
-                  TV Shows
-                </NavLink>
-                <NavLink
-                  as={RouteLink}
-                  to={`${ROUTES.BROWSE}/genre/34399`}
-                  isActive={(match, location) =>
-                    match || location.search === '?bc=34399'
-                  }
-                >
-                  Movies
-                </NavLink>
-                <NavLink as={RouteLink} to={ROUTES.LATEST}>
-                  New & Popular
-                </NavLink>
-                <NavLink as={RouteLink} to={`${ROUTES.BROWSE}/my-list`}>
-                  My List
-                </NavLink>
+                <NavItems component={NavLink} />
               </Nav>
               <Nav className="nav-secondary align-items-center">
                 <Nav.Link>
@@ -128,25 +71,25 @@ function Header({ fixed }) {
                   </Dropdown.Menu>
                 </Dropdown>
                 <NavDropdown
-                  title={<BsPersonSquare size="2rem" className="text-info" />}
+                  title={<Image src={User1} height="35" className="rounded" />}
                   id="collasible-nav-dropdown"
                   alignRight
                   menuvariant="dark"
                 >
                   <NavDropdown.Item>
-                    <BsPersonSquare size="2rem" className="text-danger mr-2" />
+                    <Image src={User2} height="35" className="mr-2 rounded" />
                     Profile Other
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <BsPersonSquare size="2rem" className="text-dark mr-2" />
+                    <Image src={User3} height="35" className="mr-2 rounded" />
                     Profile Other
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <BsPersonSquare size="2rem" className="text-success mr-2" />
+                    <Image src={User4} height="35" className="mr-2 rounded" />
                     Profile Other
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <BsPersonSquare size="2rem" className="text-warning mr-2" />
+                    <Image src={User5} height="35" className="mr-2 rounded" />
                     Profile Other
                   </NavDropdown.Item>
                   <NavDropdown.Item>Manage Profile</NavDropdown.Item>
@@ -176,15 +119,14 @@ function Header({ fixed }) {
                 </Dropdown>
               </Nav>
             </React.Fragment>
-          )}
-
-          {!loggedInUser && (
+          ) : (
             <Button
-              className="ml-auto"
               exact
               as={RouteLink}
               to={ROUTES.LOGIN}
+              className="ml-auto"
               activeClassName="d-none"
+              size="sm"
             >
               Sign In
             </Button>

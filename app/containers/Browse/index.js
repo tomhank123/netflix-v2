@@ -33,7 +33,7 @@ export function Browse({ collections, onLoadCollections }) {
 
   return (
     <React.Fragment>
-      <Header fixed />
+      <Header />
       <Container fluid>
         <Collections isSwiper {...collections} />
         <Footer />
