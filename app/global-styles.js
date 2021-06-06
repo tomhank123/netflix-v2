@@ -52,6 +52,10 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--bg-color);
     color: var(--text-color);
   }
+
+  .removecaret .dropdown-toggle::after {
+    display: none;
+  }
 `;
 
 export default GlobalStyle;
