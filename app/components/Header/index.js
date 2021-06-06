@@ -41,7 +41,7 @@ function Header({ fixed }) {
   return (
     <Wrapper>
       <Navbar fixed={fixed ? 'top' : null}>
-        <Navbar.Brand as={RouteLink} to="/">
+        <Navbar.Brand as={RouteLink} to={ROUTES.HOME}>
           <Image src={Logo} alt="Netflix Logo" height="40" />
         </Navbar.Brand>
         <Navbar.Collapse>
