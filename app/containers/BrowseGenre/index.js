@@ -57,8 +57,8 @@ export function BrowseGenre({
           onGetGenreInfo={getGenreInfo}
         />
         <Collections isSwiper {...collections} />
-        <Footer />
       </Container>
+      <Footer />
     </React.Fragment>
   );
 }

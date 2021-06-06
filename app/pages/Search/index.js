@@ -72,8 +72,8 @@ export function Search({
           <div className="mt-3" />
           <RelatedTitles {...keywords} />
           <Collections {...collections} />
-          <Footer />
         </Container>
+        <Footer />
       </ProfileSelector>
     </div>
   );

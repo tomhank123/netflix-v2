@@ -36,8 +36,8 @@ export function BrowseMyList({ collections, onLoadCollections }) {
       <Header />
       <Container fluid>
         <Collections {...collections} />
-        <Footer />
       </Container>
+      <Footer />
     </React.Fragment>
   );
 }

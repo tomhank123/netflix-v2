@@ -36,8 +36,8 @@ export function Latest({ collections, onLoadCollections }) {
       <Header />
       <Container fluid>
         <Collections isSwiper {...collections} />
-        <Footer />
       </Container>
+      <Footer />
     </React.Fragment>
   );
 }

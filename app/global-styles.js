@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   :root {
     --pallete-white: ${props => props.theme.pallete.common.white};
+    --pallete-gray: ${props => props.theme.pallete.common.gray};
 
     --pallete-primary: ${props => props.theme.pallete.primary.main};
     --pallete-primary-dark: ${props => props.theme.pallete.primary.dark};
