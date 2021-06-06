@@ -11,7 +11,7 @@ export default {
       spaceBetween: 8,
     },
     '@0.75': {
-      slidesPerView: 3,
+      slidesPerView: 5,
       spaceBetween: 10,
     },
     '@1.00': {
@@ -19,7 +19,7 @@ export default {
       spaceBetween: 12,
     },
     '@1.50': {
-      slidesPerView: 9,
+      slidesPerView: 7,
       spaceBetween: 16,
     },
   },

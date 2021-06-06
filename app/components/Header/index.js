@@ -7,7 +7,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RouteLink } from 'react-router-dom';
-import { Nav, NavLink, Navbar, Button } from 'react-bootstrap';
+import { Nav, NavLink, Button } from 'react-bootstrap';
 
 import SearchBarContainer from 'containers/SearchBar';
 import * as ROUTES from 'utils/routes';
@@ -15,23 +15,19 @@ import { useAuthListener } from 'hooks';
 import { FirebaseContext } from 'context/firebase';
 
 import Wrapper from './Wrapper';
+import Navbar from './Navbar';
 
-function Header({ isFixed }) {
+function Header({ fixed }) {
   const { firebase } = useContext(FirebaseContext);
   const { user: loggedInUser } = useAuthListener();
 
   return (
-    <Wrapper id="header">
-      <Navbar
-        bg="secondary"
-        variant="dark"
-        expand="sm"
-        fixed={isFixed ? 'top' : null}
-      >
+    <Wrapper>
+      <Navbar fixed={fixed ? 'top' : null}>
         <Navbar.Brand as={RouteLink} to="/">
           <strong>
             <strong>
-              <strong>NETFLIX LOGO</strong>
+              <strong className="text-danger h3">NETFLIX</strong>
             </strong>
           </strong>
         </Navbar.Brand>
@@ -39,18 +35,9 @@ function Header({ isFixed }) {
         <Navbar.Collapse id="navbar-nav">
           {loggedInUser && (
             <React.Fragment>
-              <Nav className="mr-auto">
+              <Nav className="nav-primary mr-auto">
                 <NavLink exact as={RouteLink} to={ROUTES.BROWSE}>
                   Home
-                </NavLink>
-                <NavLink
-                  as={RouteLink}
-                  to={`${ROUTES.BROWSE}/genre/34399`}
-                  isActive={(match, location) =>
-                    match || location.search === '?bc=34399'
-                  }
-                >
-                  Movies
                 </NavLink>
                 <NavLink
                   as={RouteLink}
@@ -61,6 +48,15 @@ function Header({ isFixed }) {
                 >
                   TV Shows
                 </NavLink>
+                <NavLink
+                  as={RouteLink}
+                  to={`${ROUTES.BROWSE}/genre/34399`}
+                  isActive={(match, location) =>
+                    match || location.search === '?bc=34399'
+                  }
+                >
+                  Movies
+                </NavLink>
                 <NavLink as={RouteLink} to={ROUTES.LATEST}>
                   New & Popular
                 </NavLink>
@@ -68,7 +64,13 @@ function Header({ isFixed }) {
                   My List
                 </NavLink>
               </Nav>
-              <SearchBarContainer />
+              {false && <SearchBarContainer />}
+              <Nav className="nav-secondary">
+                <Nav.Link>Item</Nav.Link>
+                <Nav.Link>Item</Nav.Link>
+                <Nav.Link>Item</Nav.Link>
+                <Nav.Link>Item</Nav.Link>
+              </Nav>
             </React.Fragment>
           )}
 
@@ -83,7 +85,10 @@ function Header({ isFixed }) {
               Sign In
             </Button>
           ) : (
-            <Button className="ml-3" onClick={() => firebase.auth().signOut()}>
+            <Button
+              className="ml-3 d-none"
+              onClick={() => firebase.auth().signOut()}
+            >
               Sign Out
             </Button>
           )}
@@ -94,7 +99,7 @@ function Header({ isFixed }) {
 }
 
 Header.propTypes = {
-  isFixed: PropTypes.bool,
+  fixed: PropTypes.bool,
 };
 
 export default Header;

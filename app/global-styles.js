@@ -37,12 +37,12 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 15px;
   }
   
   body.fontLoaded {
     font-family: var(--font-loaded);
-    font-size: 16px;
+    font-size: 15px;
   }
 
   #app {
