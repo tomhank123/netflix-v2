@@ -7,7 +7,6 @@ const StyledNavbar = styled(Navbar)`
 
 StyledNavbar.defaultProps = {
   variant: 'dark',
-  expand: 'md',
 };
 
 export default StyledNavbar;

@@ -45,7 +45,45 @@ function Header({ fixed }) {
         <Navbar.Collapse id="navbar-nav">
           {loggedInUser && (
             <React.Fragment>
-              <Nav className="nav-primary mr-auto align-items-center">
+              <Nav className="nav-mobile mr-auto align-items-center d-block d-md-none">
+                <NavDropdown
+                  title="Browse"
+                  menuvariant="dark"
+                  alignRight={false}
+                >
+                  <NavDropdown.Item exact as={RouteLink} to={ROUTES.BROWSE}>
+                    Home
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    as={RouteLink}
+                    to={`${ROUTES.BROWSE}/genre/83`}
+                    isActive={(match, location) =>
+                      match || location.search === '?bc=83'
+                    }
+                  >
+                    TV Shows
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    as={RouteLink}
+                    to={`${ROUTES.BROWSE}/genre/34399`}
+                    isActive={(match, location) =>
+                      match || location.search === '?bc=34399'
+                    }
+                  >
+                    Movies
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={RouteLink} to={ROUTES.LATEST}>
+                    New & Popular
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    as={RouteLink}
+                    to={`${ROUTES.BROWSE}/my-list`}
+                  >
+                    My List
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+              <Nav className="nav-primary mr-auto align-items-center d-none d-md-flex">
                 <NavLink exact as={RouteLink} to={ROUTES.BROWSE}>
                   Home
                 </NavLink>
@@ -94,7 +132,6 @@ function Header({ fixed }) {
                   id="collasible-nav-dropdown"
                   alignRight
                   menuvariant="dark"
-                  className="removecaret"
                 >
                   <NavDropdown.Item>
                     <BsPersonSquare size="2rem" className="text-danger mr-2" />
