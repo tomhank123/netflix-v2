@@ -1,6 +1,6 @@
 /*
  *
- * Heros reducer
+ * Billboard reducer
  *
  */
 import produce from 'immer';
@@ -16,7 +16,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const herosReducer = (state = initialState, action) =>
+const billboardReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case BILLBOARD[REQUEST]:
@@ -36,7 +36,7 @@ const herosReducer = (state = initialState, action) =>
     }
   });
 
-export default herosReducer;
+export default billboardReducer;
 
 function reduceBillboard(response, draft) {
   draft.billboard.item = response;

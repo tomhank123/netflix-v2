@@ -15,7 +15,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { Container } from 'react-bootstrap';
 
-import Heros from 'containers/Heros';
+import Billboard from 'containers/Billboard';
 import SelectGenres from 'components/SelectGenres';
 import Collections from 'components/Collections';
 import Header from 'components/Header';
@@ -49,7 +49,7 @@ export function BrowseGenre({
   return (
     <React.Fragment>
       <Header fixed />
-      <Heros />
+      <Billboard />
       <SelectGenres
         {...genres}
         genreId={genreId}

@@ -1,6 +1,6 @@
 /**
  *
- * Heros
+ * Billboard
  *
  */
 
@@ -24,9 +24,9 @@ import { makeSelectBillboard } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function Heros({ billboard, onLoadBillboard }) {
-  useInjectReducer({ key: 'heros', reducer });
-  useInjectSaga({ key: 'heros', saga });
+export function Billboard({ billboard, onLoadBillboard }) {
+  useInjectReducer({ key: 'billboard', reducer });
+  useInjectSaga({ key: 'billboard', saga });
 
   const { item, error, loading } = billboard;
 
@@ -71,7 +71,7 @@ export function Heros({ billboard, onLoadBillboard }) {
   return null;
 }
 
-Heros.propTypes = {
+Billboard.propTypes = {
   billboard: PropTypes.object,
   onLoadBillboard: PropTypes.func,
 };
@@ -93,4 +93,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(Heros);
+export default compose(withConnect)(Billboard);

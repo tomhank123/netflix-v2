@@ -2,17 +2,17 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the heros state domain
+ * Direct selector to the billboard state domain
  */
 
-const selectHerosDomain = state => state.heros || initialState;
+const selectHerosDomain = state => state.billboard || initialState;
 
 /**
  * Other specific selectors
  */
 
 /**
- * Default selector used by Heros
+ * Default selector used by Billboard
  */
 
 const makeSelectHeros = () =>

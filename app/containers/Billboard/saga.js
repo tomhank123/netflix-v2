@@ -25,6 +25,6 @@ export function* watchBillboard() {
   yield takeLatest(BILLBOARD[REQUEST], fetchBillboard);
 }
 
-export default function* herosSaga() {
+export default function* billboardSaga() {
   yield all([watchBillboard()]);
 }

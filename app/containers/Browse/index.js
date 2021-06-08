@@ -14,7 +14,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
 import { Container } from 'react-bootstrap';
-import Heros from 'containers/Heros';
+import Billboard from 'containers/Billboard';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Collections from 'components/Collections';
@@ -35,7 +35,7 @@ export function Browse({ collections, onLoadCollections }) {
   return (
     <React.Fragment>
       <Header fixed />
-      <Heros />
+      <Billboard />
       <Container fluid>
         <Collections isSwiper {...collections} />
       </Container>

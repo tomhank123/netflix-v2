@@ -1,3 +1,3 @@
-describe('Heros actions', () => {
+describe('Billboard actions', () => {
   describe('Default Action', () => {});
 });

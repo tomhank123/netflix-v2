@@ -4,11 +4,11 @@
 
 /* eslint-disable redux-saga/yield-effects */
 // import { take, call, put, select } from 'redux-saga/effects';
-// import herosSaga from '../saga';
+// import billboardSaga from '../saga';
 
-// const generator = herosSaga();
+// const generator = billboardSaga();
 
-describe('herosSaga Saga', () => {
+describe('billboardSaga Saga', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });
