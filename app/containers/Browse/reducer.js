@@ -5,13 +5,18 @@
  */
 import produce from 'immer';
 import { FAILURE, REQUEST, SUCCESS } from 'utils/constants';
-import { COLLECTIONS } from './actions';
+import { COLLECTIONS, BILLBOARD } from './actions';
 
 export const initialState = {
   collections: {
     loading: false,
     error: false,
     items: false,
+  },
+  billboard: {
+    loading: false,
+    error: false,
+    item: false,
   },
 };
 
@@ -33,6 +38,21 @@ const browseReducer = (state = initialState, action) =>
         draft.collections.loading = false;
         draft.collections.error = action.response;
         break;
+
+      case BILLBOARD[REQUEST]:
+        draft.billboard.loading = true;
+        break;
+
+      case BILLBOARD[SUCCESS]:
+        draft.billboard.loading = false;
+        draft.billboard.error = false;
+        reduceBillboard(action.response, draft);
+        break;
+
+      case BILLBOARD[FAILURE]:
+        draft.billboard.loading = false;
+        draft.billboard.error = action.response;
+        break;
     }
   });
 
@@ -43,4 +63,8 @@ function reduceCollections(response, draft) {
     title,
     data: data.results,
   }));
+}
+
+function reduceBillboard(response, draft) {
+  draft.billboard.item = response;
 }

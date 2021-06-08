@@ -27,5 +27,11 @@ const makeSelectCollections = () =>
     substate => substate.collections,
   );
 
+const makeSelectBillboard = () =>
+  createSelector(
+    selectBrowseDomain,
+    substate => substate.billboard,
+  );
+
 export default makeSelectBrowse;
-export { makeSelectCollections };
+export { makeSelectCollections, makeSelectBillboard };

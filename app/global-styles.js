@@ -53,6 +53,16 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--bg-color);
     color: var(--text-color);
   }
+
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @media (min-width: 992px) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
 `;
 
 export default GlobalStyle;

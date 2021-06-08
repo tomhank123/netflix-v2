@@ -20,22 +20,28 @@ import Collections from 'components/Collections';
 import Billboard from 'components/Billboard';
 
 import * as actions from './actions';
-import { makeSelectCollections } from './selectors';
+import { makeSelectCollections, makeSelectBillboard } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function Browse({ collections, onLoadCollections }) {
+export function Browse({
+  collections,
+  billboard,
+  onLoadCollections,
+  onLoadBillboard,
+}) {
   useInjectReducer({ key: 'browse', reducer });
   useInjectSaga({ key: 'browse', saga });
 
   useEffect(() => {
+    onLoadBillboard();
     onLoadCollections();
   }, []);
 
   return (
     <React.Fragment>
       <Header fixed />
-      <Billboard item={{}} />
+      <Billboard {...billboard} />
       <Container fluid>
         <Collections isSwiper {...collections} />
       </Container>
@@ -45,17 +51,24 @@ export function Browse({ collections, onLoadCollections }) {
 }
 
 Browse.propTypes = {
+  billboard: PropTypes.object,
   collections: PropTypes.object,
+  onLoadBillboard: PropTypes.func,
   onLoadCollections: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   collections: makeSelectCollections(),
+  billboard: makeSelectBillboard(),
 });
 
 function mapDispatchToProps(dispatch) {
+  const onLoadBillboard = actions.billboard.request;
   const onLoadCollections = actions.collections.request;
-  return bindActionCreators({ onLoadCollections }, dispatch);
+
+  return {
+    ...bindActionCreators({ onLoadCollections, onLoadBillboard }, dispatch),
+  };
 }
 
 const withConnect = connect(

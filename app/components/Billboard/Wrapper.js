@@ -5,4 +5,8 @@ export default styled.section`
 
   min-height: 100vh;
   background-color: white;
+
+  > img {
+    width: 100%;
+  }
 `;
