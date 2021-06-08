@@ -11,16 +11,12 @@ import Skeleton from 'react-loading-skeleton';
 
 import swiperOptions from 'utils/swiperConfig';
 import Movie from 'components/Movie';
-import Billboard from 'components/Billboard';
 import Alert from 'react-bootstrap/Alert';
 
-import { getCollections } from './helpers';
 import MovieList from './MovieList';
 import Wrapper from './Wrapper';
 
 function Collections({ isSwiper = false, loading, error, items }) {
-  const [billboard, filteredColls] = getCollections(items);
-
   if (loading) {
     return (
       <React.Fragment>
@@ -55,30 +51,26 @@ function Collections({ isSwiper = false, loading, error, items }) {
   if (items) {
     return (
       <Wrapper>
-        <Billboard item={billboard} />
-
-        {filteredColls &&
-          filteredColls.map(({ id, title, data }, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <section key={`${id}-${index}`} className="mt-5">
-              <h5 className="font-weight-bold mt-4">{title}</h5>
-              {isSwiper ? (
-                <Swiper {...swiperOptions}>
-                  {data &&
-                    data.map(movie => (
-                      <SwiperSlide key={movie.id}>
-                        <Movie item={movie} />
-                      </SwiperSlide>
-                    ))}
-                </Swiper>
-              ) : (
-                <MovieList>
-                  {data &&
-                    data.map(movie => <Movie key={movie.id} item={movie} />)}
-                </MovieList>
-              )}
-            </section>
-          ))}
+        {items.map(({ title, data }) => (
+          <section key={title} className="mt-5">
+            <h5 className="font-weight-bold mt-4">{title}</h5>
+            {isSwiper ? (
+              <Swiper {...swiperOptions}>
+                {data &&
+                  data.map(movie => (
+                    <SwiperSlide key={movie.id}>
+                      <Movie item={movie} />
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            ) : (
+              <MovieList>
+                {data &&
+                  data.map(movie => <Movie key={movie.id} item={movie} />)}
+              </MovieList>
+            )}
+          </section>
+        ))}
       </Wrapper>
     );
   }

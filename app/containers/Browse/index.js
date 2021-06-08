@@ -17,6 +17,7 @@ import { Container } from 'react-bootstrap';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Collections from 'components/Collections';
+import Billboard from 'components/Billboard';
 
 import * as actions from './actions';
 import { makeSelectCollections } from './selectors';
@@ -33,7 +34,8 @@ export function Browse({ collections, onLoadCollections }) {
 
   return (
     <React.Fragment>
-      <Header />
+      <Header fixed />
+      <Billboard item={{}} />
       <Container fluid>
         <Collections isSwiper {...collections} />
       </Container>
