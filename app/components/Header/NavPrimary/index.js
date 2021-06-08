@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Nav, NavLink, NavDropdown } from 'react-bootstrap';
-import NavItems from '../NavItems';
+import NavItems from './NavItems';
 
 function NavPrimary() {
   return (

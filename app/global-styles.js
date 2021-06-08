@@ -38,12 +38,12 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 14px;
   }
   
   body.fontLoaded {
     font-family: var(--font-loaded);
-    font-size: 15px;
+    font-size: 14px;
   }
 
   #app {
@@ -52,10 +52,6 @@ const GlobalStyle = createGlobalStyle`
 
     background-color: var(--bg-color);
     color: var(--text-color);
-  }
-
-  .removecaret .dropdown-toggle::after {
-    display: none;
   }
 `;
 
