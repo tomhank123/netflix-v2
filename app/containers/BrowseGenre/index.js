@@ -15,6 +15,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { Container } from 'react-bootstrap';
 
+import Heros from 'containers/Heros';
 import SelectGenres from 'components/SelectGenres';
 import Collections from 'components/Collections';
 import Header from 'components/Header';
@@ -47,15 +48,16 @@ export function BrowseGenre({
 
   return (
     <React.Fragment>
-      <Header />
+      <Header fixed />
+      <Heros />
+      <SelectGenres
+        {...genres}
+        genreId={genreId}
+        parentId={parentId}
+        onSelectedGenre={onSelectedGenre}
+        onGetGenreInfo={getGenreInfo}
+      />
       <Container fluid>
-        <SelectGenres
-          {...genres}
-          genreId={genreId}
-          parentId={parentId}
-          onSelectedGenre={onSelectedGenre}
-          onGetGenreInfo={getGenreInfo}
-        />
         <Collections isSwiper {...collections} />
       </Container>
       <Footer />

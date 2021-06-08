@@ -8,7 +8,6 @@ export default styled.div`
   gap: 1rem;
 
   padding: 0.5rem 1rem;
-  border: 1px solid #d8d8d8;
 
   h2 {
     margin-bottom: 0;

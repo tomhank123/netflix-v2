@@ -14,6 +14,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
 import { Container } from 'react-bootstrap';
+import Heros from 'containers/Heros';
 import Collections from 'components/Collections';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -33,7 +34,8 @@ export function Latest({ collections, onLoadCollections }) {
 
   return (
     <React.Fragment>
-      <Header />
+      <Header fixed />
+      <Heros />
       <Container fluid>
         <Collections isSwiper {...collections} />
       </Container>

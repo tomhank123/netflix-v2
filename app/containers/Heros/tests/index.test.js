@@ -1,6 +1,6 @@
 /**
  *
- * Tests for Billboard
+ * Tests for Heros
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -10,12 +10,13 @@ import React from 'react';
 import { render } from 'react-testing-library';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import Billboard from '../index';
+import { Heros } from '../index';
 
-describe('<Billboard />', () => {
+describe('<Heros />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<Billboard />);
+    const dispatch = jest.fn();
+    render(<Heros dispatch={dispatch} />);
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -31,7 +32,7 @@ describe('<Billboard />', () => {
   it.skip('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<Billboard />);
+    } = render(<Heros />);
     expect(firstChild).toMatchSnapshot();
   });
 });
