@@ -28,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
     --bg-color: ${props => props.theme.pallete.primary.main};
     --text-color: ${props => props.theme.pallete.secondary.main};
     --border-radius: ${props => props.theme.shape.borderRadius};
+
+    --easing: ${props => props.theme.transitions.easing};
+    --transition: all ${props => props.theme.transitions.duration} ${props =>
+  props.theme.transitions.easing};
   }
 
   html,

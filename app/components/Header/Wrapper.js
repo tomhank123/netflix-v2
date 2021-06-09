@@ -6,6 +6,4 @@ export default styled.div.attrs({ id: 'header' })`
 
   margin: 0;
   padding: 0;
-
-  background-color: var(--pallete-primary);
 `;

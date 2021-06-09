@@ -19,7 +19,7 @@ import Wrapper from './Wrapper';
 function Footer() {
   return (
     <Wrapper>
-      <Container>
+      <Container fluid>
         <ul className="list-inline">
           <li className="list-inline-item">
             <FaFacebookSquare size="2rem" className="text-muted" />
