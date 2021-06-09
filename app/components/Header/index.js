@@ -15,7 +15,7 @@ import { FirebaseContext } from 'context/firebase';
 import Logo from 'images/logo.svg';
 
 import Wrapper from './Wrapper';
-import Navbar from './Navbar';
+import StyledNavbar from './Navbar';
 import NavPrimary from './NavPrimary';
 import NavSecondary from './NavSecondary';
 
@@ -38,17 +38,17 @@ function Header({ fixed }) {
   }, []);
 
   return (
-    <Wrapper>
-      <Navbar
-        fixed={fixed ? 'top' : null}
-        scrolledtotop={scrolledtotop ? 1 : 0}
-        scrolldirection={scrolldirection}
-      >
+    <Wrapper
+      fixed={fixed}
+      scrolledtotop={scrolledtotop ? 1 : 0}
+      scrolldirection={scrolldirection}
+    >
+      <StyledNavbar>
         <Container fluid>
-          <Navbar.Brand as={RouteLink} to={ROUTES.HOME}>
+          <StyledNavbar.Brand as={RouteLink} to={ROUTES.HOME}>
             <Image src={Logo} alt="Netflix Logo" height="40" />
-          </Navbar.Brand>
-          <Navbar.Collapse>
+          </StyledNavbar.Brand>
+          <StyledNavbar.Collapse>
             {loggedInUser && (
               <React.Fragment>
                 <NavPrimary />
@@ -68,9 +68,9 @@ function Header({ fixed }) {
                 Sign In
               </Button>
             )}
-          </Navbar.Collapse>
+          </StyledNavbar.Collapse>
         </Container>
-      </Navbar>
+      </StyledNavbar>
     </Wrapper>
   );
 }
