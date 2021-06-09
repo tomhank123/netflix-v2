@@ -38,6 +38,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     width: 100%;
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
   }
 
   body {

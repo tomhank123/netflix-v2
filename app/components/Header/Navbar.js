@@ -13,6 +13,10 @@ const StyledNavbar = styled(Navbar)`
       padding-right: 50px;
     }
   }
+
+  .navbar-brand {
+    margin-left: -10px;
+  }
 `;
 
 StyledNavbar.defaultProps = {

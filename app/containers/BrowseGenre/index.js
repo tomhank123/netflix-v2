@@ -48,15 +48,16 @@ export function BrowseGenre({
 
   return (
     <React.Fragment>
-      <Header fixed showGenreToggle />
+      <Header fixed>
+        <SelectGenres
+          {...genres}
+          genreId={genreId}
+          parentId={parentId}
+          onSelectedGenre={onSelectedGenre}
+          onGetGenreInfo={getGenreInfo}
+        />
+      </Header>
       <Billboard />
-      <SelectGenres
-        {...genres}
-        genreId={genreId}
-        parentId={parentId}
-        onSelectedGenre={onSelectedGenre}
-        onGetGenreInfo={getGenreInfo}
-      />
       <Container fluid>
         <Collections isSwiper {...collections} />
       </Container>

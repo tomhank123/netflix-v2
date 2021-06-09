@@ -21,7 +21,7 @@ function Collections({ isSwiper = false, loading, error, items }) {
     return (
       <React.Fragment>
         {[1, 2, 3, 4, 5, 6].map(id => (
-          <section className="mt-5" key={id}>
+          <section key={id}>
             <Skeleton wrapper="h5" width={250} />
             {isSwiper ? (
               <Swiper {...swiperOptions}>
@@ -52,7 +52,7 @@ function Collections({ isSwiper = false, loading, error, items }) {
     return (
       <Wrapper>
         {items.map(({ title, data }) => (
-          <section key={title} className="mt-5">
+          <section key={title}>
             <h5 className="font-weight-bold mt-4">{title}</h5>
             {isSwiper ? (
               <Swiper {...swiperOptions}>

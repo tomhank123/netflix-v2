@@ -45,7 +45,7 @@ function SelectGenres({
 
         <Form inline>
           <select
-            className="form-control"
+            className="form-control form-control-sm"
             value={selectedGenre}
             onChange={({ target }) => setSelectedGenre(target.value)}
           >
