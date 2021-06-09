@@ -48,7 +48,7 @@ export function BrowseGenre({
 
   return (
     <React.Fragment>
-      <Header fixed />
+      <Header fixed showGenreToggle />
       <Billboard />
       <SelectGenres
         {...genres}

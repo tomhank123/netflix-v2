@@ -21,6 +21,15 @@ export default styled.div.attrs({ id: 'header' })`
     `};
 
   ${props =>
+    props.scrolldirection === 'down' &&
+    props.showGenreToggle &&
+    css`
+      .navbar:nth-child(1) {
+        display: none;
+      }
+    `};
+
+  ${props =>
     props.scrolldirection === 'up' &&
     !props.scrolledtotop &&
     css`

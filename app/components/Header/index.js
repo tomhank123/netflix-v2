@@ -14,12 +14,13 @@ import { useAuthListener, useScrollDirection } from 'hooks';
 import { FirebaseContext } from 'context/firebase';
 import Logo from 'images/logo.svg';
 
+import GenreToggle from 'containers/GenreToggle';
 import Wrapper from './Wrapper';
 import StyledNavbar from './Navbar';
 import NavPrimary from './NavPrimary';
 import NavSecondary from './NavSecondary';
 
-function Header({ fixed }) {
+function Header({ fixed, showGenreToggle = false }) {
   const { firebase } = useContext(FirebaseContext);
   const { user: loggedInUser } = useAuthListener();
   const scrolldirection = useScrollDirection('down');
@@ -40,6 +41,7 @@ function Header({ fixed }) {
   return (
     <Wrapper
       fixed={fixed}
+      showGenreToggle={showGenreToggle}
       scrolledtotop={scrolledtotop ? 1 : 0}
       scrolldirection={scrolldirection}
     >
@@ -71,12 +73,21 @@ function Header({ fixed }) {
           </StyledNavbar.Collapse>
         </Container>
       </StyledNavbar>
+
+      {showGenreToggle && (
+        <StyledNavbar>
+          <Container fluid>
+            <GenreToggle />
+          </Container>
+        </StyledNavbar>
+      )}
     </Wrapper>
   );
 }
 
 Header.propTypes = {
   fixed: PropTypes.bool,
+  showGenreToggle: PropTypes.bool,
 };
 
 export default Header;
